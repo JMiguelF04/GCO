@@ -1,4 +1,49 @@
-export default function ContactsPage() {
+'use client'
+
+import { useState } from 'react'
+
+export default function ContactosPage() {
+  const [mensagem, setMensagem] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setMensagem('')
+    setLoading(true)
+
+    const form = e.target as HTMLFormElement
+    const formData = new FormData(form)
+
+    const payload = {
+      nome: formData.get('nome'),
+      email: formData.get('email'),
+      assunto: formData.get('assunto'),
+      mensagem: formData.get('mensagem'),
+    }
+
+    try {
+      const res = await fetch('/api/contacto', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      const data = await res.json()
+
+      if (res.ok) {
+        setMensagem('Mensagem enviada com sucesso!')
+        form.reset()
+      } else {
+        setMensagem('Erro: ' + data.erro)
+      }
+    } catch (err) {
+      setMensagem('Erro ao enviar o formulário.')
+    }
+
+    setLoading(false)
+  }
+
+
   return (
     <main className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -89,10 +134,10 @@ export default function ContactsPage() {
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-2xl font-bold text-blue-800 mb-4">Envie-nos uma Mensagem</h2>
             
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nome</label>
-                <input type="text" id="name" name="name" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+                <input type="text" id="nome" name="nome" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
               </div>
               
               <div>
@@ -102,12 +147,12 @@ export default function ContactsPage() {
               
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700">Assunto</label>
-                <input type="text" id="subject" name="subject" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+                <input type="text" id="assunto" name="assunto" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
               </div>
               
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700">Mensagem</label>
-                <textarea id="message" name="message" rows={5} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+                <textarea id="mensagem" name="mensagem" rows={5} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
               </div>
               
               <div>
