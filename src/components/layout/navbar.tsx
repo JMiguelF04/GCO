@@ -77,6 +77,14 @@ const Navbar = () => {
               )}
             </div>
 
+
+            <Link
+              href="/ser_socio"
+              className='text-gray-700 hover:text-blue-800 font-medium transition-colors'
+            >
+              Ser Sócio
+            </Link>
+
             <Link 
               href="/horarios" 
               className="text-gray-700 hover:text-blue-800 font-medium transition-colors"
