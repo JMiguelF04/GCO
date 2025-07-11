@@ -20,7 +20,7 @@ const AccordionSection = ({
     <div className="border border-gray-200 rounded-lg overflow-hidden">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full text-left px-6 py-4 bg-gray-100 hover:bg-gray-200 flex justify-between items-center font-semibold text-gray-800"
+        className="w-full text-left px-6 py-4 bg-blue-700 hover:bg-blue-800 flex justify-between items-center font-semibold text-white"
       >
         <span>{title}</span>
         <span className="text-xl">{open ? '−' : '+'}</span>
@@ -54,7 +54,7 @@ export default function SerSocioPage() {
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-blue-900 bg-opacity-50 flex items-center justify-center">
+            <div className="absolute inset-0 bg-gradient-to-b from-blue-700 via-black to-yellow-400 bg-opacity-50 flex items-center justify-center">
               <h1 className="text-white text-4xl font-bold text-center">Ser Sócio do Ginásio Clube de Odivelas</h1>
             </div>
           </div>
@@ -63,6 +63,7 @@ export default function SerSocioPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white rounded-xl shadow-lg p-6 text-gray-700 space-y-4">
+                <h2 className="text-xl font-bold text-black mb-4">Ser Sócio</h2>
               <p>
                 Este espaço é dedicado aos Sócios do GCO e tem como objectivo sintetizar um conjunto de informações relevantes a todos os afiliados no Clube.
               </p>
@@ -77,7 +78,7 @@ export default function SerSocioPage() {
               </div>
             </div>
 
-             <AccordionSection title="Vantagens de Ser Sócio">
+             <AccordionSection title="Vantagens de Ser Sócio">   {/* Falta preencher com as vantagens e parcerias */}
               <p>
                 A preencher
               </p>
@@ -118,17 +119,6 @@ export default function SerSocioPage() {
                 <p><strong>SWIFT/BIC:</strong> BBPIPTPL</p>
               </div>
             </AccordionSection>
-
-            <AccordionSection title="Documentos">
-                <p>gfsdkg</p>
-                <iframe
-                    src="\Flyer GCO_2024_2025_1.3.pdf"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 'none' }}
-                />
-            
-            </AccordionSection>
           </div>
 
           <div className="lg:col-span-1 space-y-6">
@@ -154,6 +144,46 @@ export default function SerSocioPage() {
               >
                 Inscrever-se Agora
               </Link>
+            </div>
+
+            <div className='bg-white rounded-xl shadow-lg p-6 space-y-4'>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Documentação Relevante</h3>
+              <Link 
+                href="#" 
+                className="text-l block w-full bg-blue-700 hover:bg-blue-800 text-white text-center py-3 rounded-lg font-semibold transition-colors"
+              >
+                Estatutos e Regulamento Geral Interno
+              </Link>
+
+              <Link 
+                href="#" 
+                className="text-l block w-full bg-blue-700 hover:bg-blue-800 text-white text-center py-3 rounded-lg font-semibold transition-colors"
+              >
+                Condições Gerais de Acesso à Atividade Desportiva
+              </Link>
+              
+              <AccordionSection title='Relatórios de Contas / Atividades'>
+                <div className='space-y-4'>
+                    <div>
+                    <AccordionSection title='2023-2020'>
+                        <p className="text-blue-600 hover:underline cursor-pointer">2023</p>
+                        <p className="text-blue-600 hover:underline cursor-pointer">2022</p>
+                        <p className="text-blue-600 hover:underline cursor-pointer">2021</p>
+                        <p className="text-blue-600 hover:underline cursor-pointer">2020</p>
+                    </AccordionSection>
+                    </div>
+                    <div>
+                    <AccordionSection title='2019-2014'>
+                        <p className="text-blue-600 hover:underline cursor-pointer">2019</p>
+                        <p className="text-blue-600 hover:underline cursor-pointer">2018</p>
+                        <p className="text-blue-600 hover:underline cursor-pointer">2017</p>
+                        <p className="text-blue-600 hover:underline cursor-pointer">2016</p>
+                        <p className="text-blue-600 hover:underline cursor-pointer">2015</p>
+                        <p className="text-blue-600 hover:underline cursor-pointer">2014</p>
+                    </AccordionSection>
+                    </div>
+                </div>
+              </AccordionSection>
             </div>
           </div>
         </div>

@@ -1,12 +1,27 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+
+  const navbarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (navbarRef.current && !navbarRef.current.contains(event.target as Node)) {
+        setActiveDropdown(null);
+        setIsMenuOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const modalidades = [
     { name: 'Andebol', href: '/modalidades/andebol' },
@@ -21,7 +36,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-lg border-b-4 border-blue-800 sticky top-0 z-50">
+    <nav
+      ref={navbarRef}
+      className="bg-gray-900 shadow-lg border-b-4 border-blue-800 sticky top-0 z-50"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center">
@@ -34,18 +52,18 @@ const Navbar = () => {
                 />
               </div>
               <div className="hidden md:block">
-                <h1 className="text-xl font-bold text-gray-900">
+                <h1 className="text-xl font-bold text-white">
                   Ginásio Clube de Odivelas
                 </h1>
-                <p className="text-sm text-gray-600">Desporto e Cultura</p>
+                <p className="text-sm text-gray-200">Desporto e Cultura</p>
               </div>
             </Link>
           </div>
 
           <div className="hidden lg:flex items-center space-x-8">
-            <Link 
-              href="/" 
-              className="text-gray-700 hover:text-blue-800 font-medium transition-colors"
+            <Link
+              href="/"
+              className="text-white hover:text-yellow-200 font-medium transition-colors"
             >
               Início
             </Link>
@@ -53,14 +71,18 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown('modalidades')}
-                className="text-gray-700 hover:text-blue-800 font-medium transition-colors flex items-center"
+                className="text-white hover:text-yellow-200 font-medium transition-colors flex items-center"
               >
                 Modalidades
                 <svg className="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </button>
-              
+
               {activeDropdown === 'modalidades' && (
                 <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
                   {modalidades.map((modalidade) => (
@@ -77,37 +99,36 @@ const Navbar = () => {
               )}
             </div>
 
-
             <Link
               href="/ser_socio"
-              className='text-gray-700 hover:text-blue-800 font-medium transition-colors'
+              className="text-white hover:text-yellow-200 font-medium transition-colors"
             >
               Ser Sócio
             </Link>
 
-            <Link 
-              href="/horarios" 
-              className="text-gray-700 hover:text-blue-800 font-medium transition-colors"
+            <Link
+              href="/horarios"
+              className="text-white hover:text-yellow-200 font-medium transition-colors"
             >
               Horários
             </Link>
 
-            <Link 
-              href="/noticias" 
-              className="text-gray-700 hover:text-blue-800 font-medium transition-colors"
+            <Link
+              href="/noticias"
+              className="text-white hover:text-yellow-200 font-medium transition-colors"
             >
               Notícias
             </Link>
 
-            <Link 
-              href="/contactos" 
-              className="text-gray-700 hover:text-blue-800 font-medium transition-colors"
+            <Link
+              href="/contactos"
+              className="text-white hover:text-yellow-200 font-medium transition-colors"
             >
               Contactos
             </Link>
 
-            <Link 
-              href="/inscricoes" 
+            <Link
+              href="/inscricoes"
               className="bg-blue-800 text-white px-6 py-2 rounded-full hover:bg-blue-900 transition-colors font-medium"
             >
               Inscrições
@@ -121,9 +142,19 @@ const Navbar = () => {
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {isMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 )}
               </svg>
             </button>
@@ -148,10 +179,14 @@ const Navbar = () => {
                 >
                   Modalidades
                   <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </button>
-                
+
                 {activeDropdown === 'modalidades-mobile' && (
                   <div className="mt-2 pl-4 space-y-1">
                     {modalidades.map((modalidade) => (
