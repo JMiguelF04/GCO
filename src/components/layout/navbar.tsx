@@ -9,13 +9,11 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const modalidades = [
-    { name: 'Ginástica', href: '/modalidades/ginastica' },
-    { name: 'Ginástica de Representação', href: '/modalidades/ginastica-representacao' },
-    { name: 'Dança', href: '/modalidades/danca' },
-    { name: 'Patinagem Artística', href: '/modalidades/patinagem-artistica' },
     { name: 'Andebol', href: '/modalidades/andebol' },
-    { name: 'Hóquei em Patins', href: '/modalidades/hoquei-patins' },
-    { name: 'Artes Marciais', href: '/modalidades/artes-marciais' },
+    { name: 'Ginástica', href: '/modalidades/ginastica' },
+    { name: 'Patinagem Artística', href: '/modalidades/patinagem-artistica' },
+    { name: 'Xadrez', href: '/modalidades/xadrez' },
+    { name: 'Hóquei em Patins', href: '/modalidades/hoquei-em-patins' },
   ];
 
   const toggleDropdown = (dropdown: string) => {

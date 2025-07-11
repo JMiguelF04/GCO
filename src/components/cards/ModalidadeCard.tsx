@@ -37,7 +37,7 @@ export default function ModalidadeCard({ modalidade }: ModalidadeCardProps) {
       <div className="flex justify-between items-center">
         {ativo ? (
           <Link
-            href={`/modalidades/${nome.toLowerCase().replace(/\s+/g, '-')}`}
+        href={`/modalidades/${nome}`}
             className="text-blue-800 font-semibold hover:text-blue-600 transition-colors"
           >
             Saiba mais →

@@ -7,7 +7,7 @@ interface NoticiaCardProps {
 }
 
 export default function NoticiaCard({ noticia, isHighlighted = false }: NoticiaCardProps) {
-  const { titulo, resumo, data, categoria, imagem, link } = noticia;
+  const { id, titulo, resumo, data, categoria, imagem } = noticia;
   
   return (
     <article
@@ -41,7 +41,7 @@ export default function NoticiaCard({ noticia, isHighlighted = false }: NoticiaC
           {resumo}
         </p>
         <Link
-          href={link}
+          href={`/noticias/${id}`}
           className="inline-flex items-center text-blue-800 font-semibold hover:text-blue-600 transition-colors"
         >
           Ler mais
