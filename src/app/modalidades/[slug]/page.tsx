@@ -3,13 +3,14 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 
 interface ModalidadePageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-export default function ModalidadePage({ params }: ModalidadePageProps) {
-  const modalidade = modalidades.find(m => m.slug === params.slug);
+export default async function ModalidadePage({ params }: ModalidadePageProps) {
+  const { slug } = await params;
+  const modalidade = modalidades.find(m => m.slug === slug);
 
   if (!modalidade) {
     notFound();
@@ -18,7 +19,6 @@ export default function ModalidadePage({ params }: ModalidadePageProps) {
   return (
     <main className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb */}
         <nav className="mb-8">
           <div className="flex items-center space-x-2 text-sm text-gray-500">
             <Link href="/" className="hover:text-blue-600">
@@ -33,7 +33,6 @@ export default function ModalidadePage({ params }: ModalidadePageProps) {
           </div>
         </nav>
 
-        {/* Header da modalidade */}
         <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
           <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-8 text-white">
             <div className="flex items-center">
@@ -59,13 +58,12 @@ export default function ModalidadePage({ params }: ModalidadePageProps) {
           </div>
         </div>
 
-        {/* Conteúdo específico por modalidade */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Sobre a Modalidade</h2>
               
-              {params.slug === 'andebol' && (
+              {slug === 'andebol' && (
                 <div className="space-y-4">
                   <p className="text-gray-700">
                     O andebol no GCO tem uma longa tradição de excelência, com equipas competitivas em várias categorias etárias. 
@@ -97,7 +95,7 @@ export default function ModalidadePage({ params }: ModalidadePageProps) {
                 </div>
               )}
 
-              {params.slug === 'ginastica' && (
+              {slug === 'ginastica' && (
                 <div className="space-y-4">
                   <p className="text-gray-700">
                     A ginástica no GCO oferece formação completa em ginástica artística e rítmica, proporcionando aos atletas 
@@ -129,7 +127,7 @@ export default function ModalidadePage({ params }: ModalidadePageProps) {
                 </div>
               )}
 
-              {params.slug === 'patinagem-artistica' && (
+              {slug === 'patinagem-artistica' && (
                 <div className="space-y-4">
                   <p className="text-gray-700">
                     A patinagem artística no GCO combina técnica, arte e atletismo, proporcionando aos atletas uma formação 
@@ -161,7 +159,7 @@ export default function ModalidadePage({ params }: ModalidadePageProps) {
                 </div>
               )}
 
-              {params.slug === 'xadrez' && (
+              {slug === 'xadrez' && (
                 <div className="space-y-4">
                   <p className="text-gray-700">
                     O xadrez no GCO é mais do que um jogo - é uma ferramenta educativa que desenvolve o raciocínio lógico, 
@@ -193,7 +191,7 @@ export default function ModalidadePage({ params }: ModalidadePageProps) {
                 </div>
               )}
 
-              {params.slug === 'hoquei-em-patins' && (
+              {slug === 'hoquei-em-patins' && (
                 <div className="space-y-4">
                   <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
                     <p className="text-yellow-800">
@@ -214,7 +212,6 @@ export default function ModalidadePage({ params }: ModalidadePageProps) {
             </div>
           </div>
 
-          {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Informações</h3>
@@ -294,7 +291,6 @@ export default function ModalidadePage({ params }: ModalidadePageProps) {
           </div>
         </div>
 
-        {/* Botão de voltar */}
         <div className="mt-8">
           <Link
             href="/modalidades"
@@ -311,7 +307,6 @@ export default function ModalidadePage({ params }: ModalidadePageProps) {
   );
 }
 
-// Gerar páginas estáticas para todas as modalidades
 export async function generateStaticParams() {
   return modalidades.map((modalidade) => ({
     slug: modalidade.slug,

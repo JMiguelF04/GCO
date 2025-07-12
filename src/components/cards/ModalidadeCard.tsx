@@ -6,7 +6,7 @@ interface ModalidadeCardProps {
 }
 
 export default function ModalidadeCard({ modalidade }: ModalidadeCardProps) {
-  const { nome, icone, descricao, ativo } = modalidade;
+  const { nome, slug, icone, descricao, ativo } = modalidade;
   
   return (
     <div
@@ -37,7 +37,7 @@ export default function ModalidadeCard({ modalidade }: ModalidadeCardProps) {
       <div className="flex justify-between items-center">
         {ativo ? (
           <Link
-        href={`/modalidades/${nome}`}
+            href={`/modalidades/${slug}`}
             className="text-blue-800 font-semibold hover:text-blue-600 transition-colors"
           >
             Saiba mais →

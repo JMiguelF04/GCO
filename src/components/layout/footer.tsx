@@ -5,12 +5,10 @@ import Image from 'next/image';
 const Footer = () => {
   const modalidades = [
     { name: 'Ginástica', href: '/modalidades/ginastica' },
-    { name: 'Ginástica de Representação', href: '/modalidades/ginastica-representacao' },
-    { name: 'Dança', href: '/modalidades/danca' },
     { name: 'Patinagem Artística', href: '/modalidades/patinagem-artistica' },
     { name: 'Andebol', href: '/modalidades/andebol' },
     { name: 'Hóquei em Patins', href: '/modalidades/hoquei-patins' },
-    { name: 'Artes Marciais', href: '/modalidades/artes-marciais' },
+    { name: 'Xadrez', href: '/modalidades/xadrez' },
   ];
 
   const linksSociais = [
