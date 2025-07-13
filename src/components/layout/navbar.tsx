@@ -31,6 +31,12 @@ const Navbar = () => {
     { name: 'Hóquei em Patins', href: '/modalidades/hoquei-em-patins' },
   ];
 
+  const clube = [
+    { name: 'História', href: '/historia' },
+    { name: 'Ser Sócio', href: '/ser_socio' },
+    { name: 'Contactos', href: '/contactos' },
+  ];
+
   const toggleDropdown = (dropdown: string) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
   };
@@ -99,12 +105,36 @@ const Navbar = () => {
               )}
             </div>
 
-            <Link
-              href="/ser_socio"
-              className="text-white hover:text-yellow-200 font-medium transition-colors"
-            >
-              Ser Sócio
-            </Link>
+            <div className="relative">
+              <button
+                onClick={() => toggleDropdown('clube')}
+                className="text-white hover:text-yellow-200 font-medium transition-colors flex items-center"
+              >
+                Clube
+                <svg className="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+
+              {activeDropdown === 'clube' && (
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                  {clube.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 transition-colors"
+                      onClick={() => setActiveDropdown(null)}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
 
             <Link
               href="/horarios"
@@ -118,13 +148,6 @@ const Navbar = () => {
               className="text-white hover:text-yellow-200 font-medium transition-colors"
             >
               Notícias
-            </Link>
-
-            <Link
-              href="/contactos"
-              className="text-white hover:text-yellow-200 font-medium transition-colors"
-            >
-              Contactos
             </Link>
 
             <Link
@@ -206,6 +229,41 @@ const Navbar = () => {
                 )}
               </div>
 
+              <div className="px-3 py-2">
+                <button
+                  onClick={() => toggleDropdown('clube-mobile')}
+                  className="flex justify-between items-center w-full text-left text-gray-700 hover:text-blue-800"
+                >
+                  Clube
+                  <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+
+                {activeDropdown === 'clube-mobile' && (
+                  <div className="mt-2 pl-4 space-y-1">
+                    {clube.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        className="block py-1 text-sm text-gray-600 hover:text-blue-800"
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          setActiveDropdown(null);
+                        }}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+
               <Link
                 href="/horarios"
                 className="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded-md"
@@ -220,14 +278,6 @@ const Navbar = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Notícias
-              </Link>
-
-              <Link
-                href="/contactos"
-                className="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded-md"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contactos
               </Link>
 
               <Link
