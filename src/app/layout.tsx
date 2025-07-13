@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "../components/layout/footer";
 import Navbar from "../components/layout/navbar";
 import LogoRain from "@/components/layout/LogoRain";
+import SponsorsSection from "@/components/SponsorsSection";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({
       >
         <Navbar />
         {children}
+        <SponsorsSection />
         <Footer />
       </body>
     </html>

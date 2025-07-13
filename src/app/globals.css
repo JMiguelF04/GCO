@@ -125,4 +125,23 @@ body {
     animation-iteration-count: infinite;
     animation-timing-function: linear;
   }
+
+  /* Animação para o carrossel de patrocinadores */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.333%);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 40s linear infinite;
+    will-change: transform;
+  }
+
+  .animate-scroll:hover {
+    animation-play-state: paused;
+  }
 }

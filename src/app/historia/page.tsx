@@ -27,7 +27,7 @@ export default function HistoriaPage() {
       content: `Tendo em vista o engrandecimento do desporto nacional e a promoção da acção cultural, nasceu em 5 de maio de 1978 o Ginásio Clube de Odivelas (G.C.O), então denominado Ginásio Clube Recreativo Estrelas do Bairro Olaio (E.B.O).
 
 A fundação foi fruto da iniciativa de um grupo de homens, mulheres e jovens determinados a transformar o panorama desportivo e cultural de uma localidade tão densa e populosa como Odivelas.`,
-      image: '/2000_5f6603a8de4ce.jpg', // Imagem do logótipo do clube para representar a fundação
+      image: '/2000_5f6603a8de4ce.jpg', 
       emoji: '📆'
     },
     {
@@ -43,7 +43,7 @@ O crescimento foi impressionante:
 • De 2 para 7 modalidades: atletismo, futebol de cinco, andebol, ginástica, patinagem artística, hóquei em patins e ténis de mesa
 
 Apesar das dificuldades constantes, foi uma década de ouro para o clube.`,
-      image: '/2000_5f6603c1a38cf.jpg', // Imagem histórica do clube
+      image: '/2000_5f6603c1a38cf.jpg', 
       emoji: '📆'
     },
     {
@@ -73,7 +73,7 @@ Perante a nova dimensão e prestígio alcançado, o nome original deixou de refl
 • A preocupação permanente com o atendimento aos associados e à população
 
 A motivação mantém-se inabalável: fazer do G.C.O. o maior e melhor clube do concelho de Odivelas.`,
-      image: '/2000_5f6603c1a8aad.jpg', // Logótipo actual do clube
+      image: '/2000_5f6603c1a8aad.jpg', 
       emoji: '📆'
     }
   ];
