@@ -32,7 +32,7 @@ export default function HeroSection() {
               href="/modalidades"
               className="border-2 border-white text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-white hover:text-blue-900 transition-colors"
             >
-              Nossas Modalidades
+              As Nossas Modalidades
             </a>
           </div>
         </div>
