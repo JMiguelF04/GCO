@@ -149,14 +149,14 @@ export default function SerSocioPage() {
             <div className='bg-white rounded-xl shadow-lg p-6 space-y-4'>
               <h3 className="text-xl font-bold text-gray-900 mb-4">Documentação Relevante</h3>
               <Link 
-                href="#" 
+                href="\files\pdf\estatutos-regulamento-geral-interno.pdf" 
                 className="text-l block w-full bg-blue-700 hover:bg-blue-800 text-white text-center py-3 rounded-lg font-semibold transition-colors"
               >
                 Estatutos e Regulamento Geral Interno
               </Link>
 
               <Link 
-                href="#" 
+                href="\files\pdf\condicoes-gerais-acesso-atividade-desportiva.pdf" 
                 className="text-l block w-full bg-blue-700 hover:bg-blue-800 text-white text-center py-3 rounded-lg font-semibold transition-colors"
               >
                 Condições Gerais de Acesso à Atividade Desportiva
@@ -166,20 +166,20 @@ export default function SerSocioPage() {
                 <div className='space-y-4'>
                     <div>
                     <AccordionSection title='2023-2020'>
-                        <p className="text-blue-600 hover:underline cursor-pointer">2023</p>
-                        <p className="text-blue-600 hover:underline cursor-pointer">2022</p>
-                        <p className="text-blue-600 hover:underline cursor-pointer">2021</p>
-                        <p className="text-blue-600 hover:underline cursor-pointer">2020</p>
+                      <a href="\files\pdf\relatorios-de-contas\Relatorio-de-contas_GCO_2023.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2023</a>
+                      <a href="\files\pdf\relatorios-de-contas\Relatorio-de-contas_GCO_2022.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2022</a>
+                      <a href="\files\pdf\relatorios-de-contas\Relatorio-contas-2021.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2021</a>
+                      <a href="\files\pdf\relatorios-de-contas\GCO-Relatorio-Contas-2020.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2020</a>
                     </AccordionSection>
                     </div>
                     <div>
                     <AccordionSection title='2019-2014'>
-                        <p className="text-blue-600 hover:underline cursor-pointer">2019</p>
-                        <p className="text-blue-600 hover:underline cursor-pointer">2018</p>
-                        <p className="text-blue-600 hover:underline cursor-pointer">2017</p>
-                        <p className="text-blue-600 hover:underline cursor-pointer">2016</p>
-                        <p className="text-blue-600 hover:underline cursor-pointer">2015</p>
-                        <p className="text-blue-600 hover:underline cursor-pointer">2014</p>
+                      <a href="/files/pdf/relatorios-de-contas/Relatorio-contas-2019.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2019</a>
+                      <a href="/files/pdf/relatorios-de-contas/Relatorio-contas-2018.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2018</a>
+                      <a href="/files/pdf/relatorios-de-contas/Relatorio-contas-2017.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2017</a>
+                      <a href="/files/pdf/relatorios-de-contas/Relatorio-contas-2016.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2016</a>
+                      <a href="/files/pdf/relatorios-de-contas/Relatorio-contas-2015.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2015</a>
+                      <a href="/files/pdf/relatorios-de-contas/Relatorio-contas-2014.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2014</a>
                     </AccordionSection>
                     </div>
                 </div>
