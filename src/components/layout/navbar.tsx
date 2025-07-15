@@ -137,9 +137,10 @@ const Navbar = () => {
             </div>
 
             <Link
-              href="/horarios"
+              href="/atletas"
               className="text-white hover:text-yellow-200 font-medium transition-colors"
             >
+              {/* Em principio isto é para tirar da Navbar */}
               Altetas
             </Link>
 

@@ -267,10 +267,19 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                 </div>
               )}
             </div>
-
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="space-y-4">
+              <div className="bg-white rounded-xl shadow-lg p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Os Atletas</h3>
+                <Link
+                  href={`/modalidades/${slug}/atletas`}
+                  className="bg-blue-600 w-full border border-blue-600 text-white hover:bg-blue-700 px-4 py-3 rounded-lg text-center font-semibold transition-colors block"
+                >
+                  Consultar Lista
+                </Link>
+              </div>
+              <div className="bg-white rounded-xl shadow-lg p-6">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Contacto</h3>
-              <div className="space-y-3 text-sm text-gray-600">
+              <div className="space-y-3 text-sm text-gray-600 space">
                 <div className="flex items-center">
                   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
@@ -286,6 +295,7 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                   </svg>
                   <span>Sede em Odivelas, Lisboa</span>
                 </div>
+              </div>
               </div>
             </div>
           </div>
