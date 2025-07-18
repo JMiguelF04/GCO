@@ -17,6 +17,7 @@
   --blue-800: #1e40af;
   --blue-900: #1e3a8a;
   --blue-1000:#4169e1;
+  --blue-1100:#000498;
   
   --yellow-50: #fffbeb;
   --yellow-100: #fef3c7;
@@ -28,6 +29,7 @@
   --yellow-700: #b45309;
   --yellow-800: #92400e;
   --yellow-900: #78350f;
+  --yellow-1000:#faf51c;
   
   --background: var(--primary-white);
   --foreground: var(--primary-black);

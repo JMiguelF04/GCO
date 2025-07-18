@@ -137,6 +137,14 @@ const Navbar = () => {
             </div>
 
             <Link
+              href="/atletas"
+              className="text-white hover:text-yellow-200 font-medium transition-colors"
+            >
+              {/* Em principio isto é para tirar da Navbar */}
+              Altetas
+            </Link>
+
+            <Link
               href="/horarios"
               className="text-white hover:text-yellow-200 font-medium transition-colors"
             >
@@ -262,6 +270,14 @@ const Navbar = () => {
                   </div>
                 )}
               </div>
+
+              <Link
+                href="/horarios"
+                className="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded-md"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Atletas
+              </Link>
               
 
               <Link
