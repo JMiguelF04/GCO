@@ -31,8 +31,6 @@ interface AtletaPageProps {
 
 export default function AtletaDetalhePage({ params }: AtletaPageProps) {
   const modalidade = modalidades.find((m) => m.slug === params.slug);
-
-  // Procurar atleta pelo id (convertendo para número)
   const atleta = atletasExemplo.find((a) => a.id === Number(params.id));
 
   if (!modalidade || !atleta) {
@@ -41,27 +39,36 @@ export default function AtletaDetalhePage({ params }: AtletaPageProps) {
 
   return (
     <main className="min-h-screen bg-gray-50 py-12 relative">
-      <div className="max-w-xl mx-auto px-4 bg-white rounded-lg shadow p-8">
-        <h1 className="text-2xl font-bold mb-4 text-blue-900">
-          Detalhes do Atleta
-        </h1>
-        <ul className="mb-6 text-lg">
-          <li>
-            <span className="font-semibold">Nome:</span> {atleta.nome}
-          </li>
-          <li>
-            <span className="font-semibold">Idade:</span> {atleta.idade}
-          </li>
-          <li>
-            <span className="font-semibold">Posição:</span> {atleta.posicao}
-          </li>
-          <li>
-            <span className="font-semibold">Modalidade:</span> {modalidade.nome}
-          </li>
-        </ul>
+      <div className="mx-auto px-4 bg-white rounded-lg shadow p-8">
+        <div className="flex items-start gap-230">
+          <div>
+            <h1 className="text-2xl font-bold mb-4 text-blue-900">
+              {atleta.nome}
+            </h1>
+            <ul className="mb-6 text-black text-lg">
+              <li>
+                <span className="font-semibold">Idade:</span> {atleta.idade}
+              </li>
+              <li>
+                <span className="font-semibold">Posição:</span> {atleta.posicao}
+              </li>
+              <li>
+                <span className="font-semibold">Modalidade:</span> {modalidade.nome}
+              </li>
+              <li>
+                <span className="font-semibold">Peso:</span> 70 kg
+              </li>
+            </ul>
+          </div>
+          <img
+            src="\imagem_atleta.png"
+            alt={`Foto de ${atleta.nome}`}
+            className="w-60 h-60 object-cover rounded-lg shadow"
+          />
+        </div>
         <Link
           href={`/modalidades/${modalidade.slug}/atletas`}
-          className="text-white bg-blue-600 border border-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold transition-colors shadow-lg"
+          className="text-white bg-blue-600 border border-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold transition-colors shadow-lg mt-6 inline-block"
         >
           &larr; Voltar à lista de atletas
         </Link>
