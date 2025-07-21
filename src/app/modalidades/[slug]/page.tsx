@@ -1,4 +1,4 @@
-import { modalidades } from "@/data/modalidades";
+import { getModalidadeBySlug, Modalidade } from "@/data/modalidades";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ interface ModalidadePageProps {
 
 export default async function ModalidadePage({ params }: ModalidadePageProps) {
   const { slug } = await params;
-  const modalidade = modalidades.find(m => m.slug === slug);
+  const modalidade = getModalidadeBySlug(slug);
 
   if (!modalidade) {
     notFound();
@@ -19,305 +19,372 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
   return (
     <main className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumb Navigation */}
         <nav className="mb-8">
           <div className="flex items-center space-x-2 text-sm text-gray-500">
-            <Link href="/" className="hover:text-blue-600">
+            <Link href="/" className="hover:text-blue-600 transition-colors">
               Início
             </Link>
             <span>/</span>
-            <Link href="/modalidades" className="hover:text-blue-600">
+            <Link href="/modalidades" className="hover:text-blue-600 transition-colors">
               Modalidades
             </Link>
             <span>/</span>
-            <span className="text-gray-900">{modalidade.nome}</span>
+            <span className="text-gray-900 font-medium">{modalidade.nome}</span>
           </div>
         </nav>
 
+        {/* Header Section */}
         <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
-          <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-8 text-white">
-            <div className="flex items-center">
-              <div className="text-6xl mr-6">
-                {modalidade.icone}
-              </div>
-              <div>
-                <h1 className="text-4xl font-bold mb-2">
-                  {modalidade.nome}
-                </h1>
-                <p className="text-xl text-blue-100">
-                  {modalidade.descricao}
-                </p>
-                {!modalidade.ativo && (
-                  <div className="mt-4">
-                    <span className="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-bold">
-                      MODALIDADE TEMPORARIAMENTE SUSPENSA
+          <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-8 text-white relative">
+            <div className="absolute inset-0 bg-black/10"></div>
+            <div className="relative z-10">
+              <div className="flex items-center">
+                <div className="text-6xl mr-6 filter drop-shadow-lg">
+                  {modalidade.icone}
+                </div>
+                <div>
+                  <h1 className="text-4xl font-bold mb-2">
+                    {modalidade.nome}
+                  </h1>
+                  <p className="text-xl text-blue-100 mb-3">
+                    {modalidade.descricao}
+                  </p>
+                  <div className="flex items-center space-x-4 text-sm">
+                    <span className="bg-blue-500/30 px-3 py-1 rounded-full">
+                      {modalidade.categoria}
                     </span>
+                    <span className="bg-blue-500/30 px-3 py-1 rounded-full">
+                      A partir dos {modalidade.idadeMinima} anos
+                    </span>
+                    {modalidade.ativo ? (
+                      <span className="bg-green-500 px-3 py-1 rounded-full text-white font-medium">
+                        ✓ Ativo
+                      </span>
+                    ) : (
+                      <span className="bg-red-500 px-3 py-1 rounded-full text-white font-medium">
+                        ⚠ Suspenso
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {modalidade.ativo ? (
+          <>
+            {/* Quick Info Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white rounded-xl shadow-md p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                    <span className="text-2xl">💰</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900">Preços</h3>
+                    <p className="text-sm text-gray-600">Valores mensais</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Mensalidade:</span>
+                    <span className="font-semibold">{modalidade.preco.mensalidade}€</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Inscrição:</span>
+                    <span className="font-semibold">{modalidade.preco.inscricao}€</span>
+                  </div>
+                  {modalidade.preco.equipamento && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Equipamento:</span>
+                      <span className="font-semibold">{modalidade.preco.equipamento}€</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl shadow-md p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                    <span className="text-2xl">👥</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900">Treinadores</h3>
+                    <p className="text-sm text-gray-600">{modalidade.treinadores.length} profissional{modalidade.treinadores.length !== 1 ? 'is' : ''}</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  {modalidade.treinadores.map((treinador, index) => (
+                    <div key={index} className="text-sm">
+                      <p className="font-medium text-gray-900">{treinador.nome}</p>
+                      <p className="text-gray-600">{treinador.experiencia}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl shadow-md p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                    <span className="text-2xl">📅</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900">Horários</h3>
+                    <p className="text-sm text-gray-600">{modalidade.horarios.length} sessões/semana</p>
+                  </div>
+                </div>
+                <div className="text-sm text-gray-600">
+                  <p>Vários horários disponíveis</p>
+                  <p>Ver tabela completa abaixo</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Left Column */}
+              <div className="space-y-8">
+                {/* Introdução */}
+                <div className="bg-white rounded-xl shadow-md p-6">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Sobre a Modalidade</h2>
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    {modalidade.detalhes.introducao}
+                  </p>
+                </div>
+
+                {/* Objetivos */}
+                <div className="bg-white rounded-xl shadow-md p-6">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Objetivos</h2>
+                  <ul className="space-y-2">
+                    {modalidade.detalhes.objetivos.map((objetivo, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="text-blue-600 mr-2 mt-1">•</span>
+                        <span className="text-gray-700">{objetivo}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Benefícios */}
+                <div className="bg-white rounded-xl shadow-md p-6">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefícios</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {modalidade.beneficios.map((beneficio, index) => (
+                      <div key={index} className="flex items-center">
+                        <span className="text-green-500 mr-2">✓</span>
+                        <span className="text-gray-700 text-sm">{beneficio}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Níveis */}
+                <div className="bg-white rounded-xl shadow-md p-6">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Níveis Disponíveis</h2>
+                  <div className="space-y-3">
+                    {modalidade.niveis.map((nivel, index) => (
+                      <div key={index} className="bg-blue-50 p-3 rounded-lg">
+                        <span className="font-medium text-blue-900">{nivel}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column */}
+              <div className="space-y-8">
+                {/* Horários */}
+                <div className="bg-white rounded-xl shadow-md p-6">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Horários</h2>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b">
+                          <th className="text-left py-2 font-semibold">Dia</th>
+                          <th className="text-left py-2 font-semibold">Horário</th>
+                          <th className="text-left py-2 font-semibold">Nível</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {modalidade.horarios.map((horario, index) => (
+                          <tr key={index} className="border-b border-gray-100">
+                            <td className="py-2 text-gray-900">{horario.dia}</td>
+                            <td className="py-2 text-gray-700">{horario.inicio} - {horario.fim}</td>
+                            <td className="py-2">
+                              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">
+                                {horario.nivel}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* Treinadores Detalhados */}
+                <div className="bg-white rounded-xl shadow-md p-6">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Equipa Técnica</h2>
+                  <div className="space-y-6">
+                    {modalidade.treinadores.map((treinador, index) => (
+                      <div key={index} className="border-b border-gray-100 last:border-0 pb-4 last:pb-0">
+                        <h3 className="font-bold text-gray-900 mb-2">{treinador.nome}</h3>
+                        <p className="text-gray-600 text-sm mb-2">{treinador.experiencia}</p>
+                        <div className="space-y-1">
+                          <p className="text-sm font-medium text-gray-700">Qualificações:</p>
+                          <ul className="space-y-1">
+                            {treinador.qualificacoes.map((qualificacao, qIndex) => (
+                              <li key={qIndex} className="text-sm text-gray-600 flex items-center">
+                                <span className="text-blue-500 mr-2">•</span>
+                                {qualificacao}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Competições */}
+                {modalidade.competicoes.length > 0 && (
+                  <div className="bg-white rounded-xl shadow-md p-6">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Competições</h2>
+                    <div className="space-y-2">
+                      {modalidade.competicoes.map((competicao, index) => (
+                        <div key={index} className="flex items-center">
+                          <span className="text-yellow-500 mr-2">🏆</span>
+                          <span className="text-gray-700 text-sm">{competicao}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
+
+                {/* Equipamento */}
+                <div className="bg-white rounded-xl shadow-md p-6">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Equipamento Necessário</h2>
+                  <div className="space-y-2">
+                    {modalidade.equipamentoNecessario.map((item, index) => (
+                      <div key={index} className="flex items-center">
+                        <span className="text-blue-500 mr-2">•</span>
+                        <span className="text-gray-700 text-sm">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Instalações */}
+                <div className="bg-white rounded-xl shadow-md p-6">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Instalações</h2>
+                  <div className="space-y-2">
+                    {modalidade.instalacoes.map((instalacao, index) => (
+                      <div key={index} className="flex items-center">
+                        <span className="text-green-500 mr-2">✓</span>
+                        <span className="text-gray-700 text-sm">{instalacao}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Sobre a Modalidade</h2>
+            {/* Metodologia e Avaliação */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+              <div className="bg-white rounded-xl shadow-md p-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Metodologia</h2>
+                <p className="text-gray-700 leading-relaxed">{modalidade.detalhes.metodologia}</p>
+              </div>
+
+              <div className="bg-white rounded-xl shadow-md p-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Avaliação e Progressão</h2>
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2">Avaliação:</h3>
+                    <p className="text-gray-700 text-sm">{modalidade.detalhes.avaliacao}</p>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2">Progressão:</h3>
+                    <p className="text-gray-700 text-sm">{modalidade.detalhes.progressao}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Contacto e Inscrição */}
+            <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg p-8 mt-8 text-white">
+              <div className="text-center mb-6">
+                <h2 className="text-3xl font-bold mb-2">Pronto para começar?</h2>
+                <p className="text-blue-100">Junte-se a nós e descubra o seu potencial!</p>
+              </div>
               
-              {slug === 'andebol' && (
-                <div className="space-y-4">
-                  <p className="text-gray-700">
-                    O andebol no GCO tem uma longa tradição de excelência, com equipas competitivas em várias categorias etárias. 
-                    Desenvolvemos não apenas as habilidades técnicas e táticas, mas também o espírito de equipa e os valores desportivos.
-                  </p>
-                  <p className="text-gray-700">
-                    As nossas equipas participam regularmente em competições distritais e nacionais, conseguindo sempre resultados de destaque. 
-                    O trabalho realizado pelos nossos treinadores qualificados permite o desenvolvimento integral dos atletas.
-                  </p>
-                  <h3 className="text-xl font-semibold text-gray-900 mt-6 mb-3">Categorias Disponíveis</h3>
-                  <ul className="space-y-2 text-gray-700">
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                      Iniciados (12-14 anos)
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                      Juvenis (14-16 anos)
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                      Juniores (16-18 anos)
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                      Seniores (+18 anos)
-                    </li>
-                  </ul>
-                </div>
-              )}
-
-              {slug === 'ginastica' && (
-                <div className="space-y-4">
-                  <p className="text-gray-700">
-                    A ginástica no GCO oferece formação completa em ginástica artística e rítmica, proporcionando aos atletas 
-                    o desenvolvimento da flexibilidade, força, coordenação e expressão corporal.
-                  </p>
-                  <p className="text-gray-700">
-                    Com instalações modernas e treinadores especializados, criamos um ambiente seguro e estimulante para o 
-                    desenvolvimento dos nossos ginastas, desde os primeiros passos até ao alto rendimento.
-                  </p>
-                  <h3 className="text-xl font-semibold text-gray-900 mt-6 mb-3">Disciplinas</h3>
-                  <ul className="space-y-2 text-gray-700">
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                      Ginástica Artística Feminina
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                      Ginástica Artística Masculina
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                      Ginástica Rítmica
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                      Ginástica de Trampolins
-                    </li>
-                  </ul>
-                </div>
-              )}
-
-              {slug === 'patinagem-artistica' && (
-                <div className="space-y-4">
-                  <p className="text-gray-700">
-                    A patinagem artística no GCO combina técnica, arte e atletismo, proporcionando aos atletas uma formação 
-                    completa que desenvolve a coordenação, equilíbrio e expressão artística.
-                  </p>
-                  <p className="text-gray-700">
-                    Os nossos patinadores participam em competições regionais e nacionais, representando o clube com distinção 
-                    e alcançando resultados de excelência nas suas categorias.
-                  </p>
-                  <h3 className="text-xl font-semibold text-gray-900 mt-6 mb-3">Modalidades</h3>
-                  <ul className="space-y-2 text-gray-700">
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                      Solo Feminino
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                      Solo Masculino
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                      Pares Artísticos
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                      Dança no Gelo
-                    </li>
-                  </ul>
-                </div>
-              )}
-
-              {slug === 'xadrez' && (
-                <div className="space-y-4">
-                  <p className="text-gray-700">
-                    O xadrez no GCO é mais do que um jogo - é uma ferramenta educativa que desenvolve o raciocínio lógico, 
-                    a capacidade de análise e a tomada de decisões estratégicas.
-                  </p>
-                  <p className="text-gray-700">
-                    Os nossos enxadristas participam em torneios escolares, distritais e nacionais, representando o clube 
-                    com distinção e contribuindo para o prestígio da modalidade.
-                  </p>
-                  <h3 className="text-xl font-semibold text-gray-900 mt-6 mb-3">Atividades</h3>
-                  <ul className="space-y-2 text-gray-700">
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                      Treinos Regulares
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                      Torneios Internos
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                      Competições Escolares
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
-                      Campeonatos Distritais
-                    </li>
-                  </ul>
-                </div>
-              )}
-
-              {slug === 'hoquei-em-patins' && (
-                <div className="space-y-4">
-                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-                    <p className="text-yellow-800">
-                      <strong>Atenção:</strong> Esta modalidade encontra-se temporariamente suspensa devido ao não cumprimento 
-                      de regulamentações específicas. Estamos a trabalhar para resolver a situação o mais rapidamente possível.
-                    </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h3 className="text-xl font-bold mb-4">Informações de Contacto</h3>
+                  <div className="space-y-2">
+                    <p><strong>Responsável:</strong> {modalidade.contacto.responsavel}</p>
+                    {modalidade.contacto.telefone && (
+                      <p><strong>Telefone:</strong> {modalidade.contacto.telefone}</p>
+                    )}
+                    {modalidade.contacto.email && (
+                      <p><strong>Email:</strong> {modalidade.contacto.email}</p>
+                    )}
                   </div>
-                  <p className="text-gray-700">
-                    O hóquei em patins tem uma tradição importante no GCO, sendo uma modalidade que combina velocidade, 
-                    técnica e espírito de equipa de forma única.
-                  </p>
-                  <p className="text-gray-700">
-                    Estamos empenhados em retomar a atividade desta modalidade assim que as condições regulamentares 
-                    sejam restabelecidas, proporcionando novamente aos nossos atletas a oportunidade de praticar este desporto.
+                </div>
+                
+                <div className="text-center md:text-right">
+                  <Link
+                    href="/inscricoes"
+                    className="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-blue-50 transition-colors shadow-lg"
+                  >
+                    Inscrever-me Agora
+                  </Link>
+                  <p className="text-sm text-blue-100 mt-2">
+                    Processo de inscrição simples e rápido
                   </p>
                 </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          /* Modalidade Suspensa */
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center">
+            <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <span className="text-4xl">⚠️</span>
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Modalidade Temporariamente Suspensa</h2>
+            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              Esta modalidade encontra-se temporariamente suspensa devido a questões regulamentares. 
+              Estamos a trabalhar para retomar as atividades o mais breve possível.
+            </p>
+            <div className="bg-blue-50 p-6 rounded-lg mb-6">
+              <h3 className="font-bold text-blue-900 mb-2">Interessado nesta modalidade?</h3>
+              <p className="text-blue-700 mb-4">
+                Pode registar o seu interesse e será contactado assim que as atividades forem retomadas.
+              </p>
+              <Link
+                href="/contactos"
+                className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Registar Interesse
+              </Link>
+            </div>
+            <div className="text-sm text-gray-500">
+              <p><strong>Contacto:</strong> {modalidade.contacto.responsavel}</p>
+              {modalidade.contacto.email && (
+                <p><strong>Email:</strong> {modalidade.contacto.email}</p>
               )}
             </div>
           </div>
-
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Informações</h3>
-              
-              {modalidade.ativo ? (
-                <div className="space-y-4">
-                  <div className="flex items-center text-green-600">
-                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="font-semibold">Modalidade Ativa</span>
-                  </div>
-                  
-                  <div className="pt-4 border-t border-gray-200">
-                    <Link
-                      href="/inscricoes"
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg text-center font-semibold transition-colors block"
-                    >
-                      Inscrever-se Agora
-                    </Link>
-                  </div>
-                  
-                  <div className="pt-2">
-                    <Link
-                      href="/contactos"
-                      className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-3 rounded-lg text-center font-semibold transition-colors block"
-                    >
-                      Mais Informações
-                    </Link>
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  <div className="flex items-center text-red-600">
-                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                    </svg>
-                    <span className="font-semibold">Modalidade Suspensa</span>
-                  </div>
-                  
-                  <p className="text-gray-600 text-sm">
-                    Esta modalidade encontra-se temporariamente suspensa. Para mais informações, entre em contacto connosco.
-                  </p>
-                  
-                  <div className="pt-4 border-t border-gray-200">
-                    <Link
-                      href="/contactos"
-                      className="w-full border border-gray-400 text-gray-600 hover:bg-gray-50 px-4 py-3 rounded-lg text-center font-semibold transition-colors block"
-                    >
-                      Contactar Clube
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
-            <div className="space-y-4">
-              <div className="bg-white rounded-xl shadow-lg p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Os Atletas</h3>
-                <Link
-                  href={`/modalidades/${slug}/atletas`}
-                  className="bg-blue-600 w-full border border-blue-600 text-white hover:bg-blue-700 px-4 py-3 rounded-lg text-center font-semibold transition-colors block"
-                >
-                  Consultar Lista
-                </Link>
-              </div>
-              <div className="bg-white rounded-xl shadow-lg p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Contacto</h3>
-              <div className="space-y-3 text-sm text-gray-600 space">
-                <div className="flex items-center">
-                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                  </svg>
-                  <a href="mailto:info@gcodivelas.pt" className="hover:text-blue-600">
-                    info@gcodivelas.pt
-                  </a>
-                </div>
-                <div className="flex items-center">
-                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                  </svg>
-                  <span>Sede em Odivelas, Lisboa</span>
-                </div>
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-8">
-          <Link
-            href="/modalidades"
-            className="inline-flex items-center bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-900 transition-colors"
-          >
-            <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-            </svg>
-            Voltar às Modalidades
-          </Link>
-        </div>
+        )}
       </div>
     </main>
   );
 }
 
 export async function generateStaticParams() {
+  const { modalidades } = await import("@/data/modalidades");
   return modalidades.map((modalidade) => ({
     slug: modalidade.slug,
   }));

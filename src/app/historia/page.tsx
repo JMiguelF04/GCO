@@ -9,13 +9,34 @@ export default function HistoriaPage() {
 
   useEffect(() => {
     const handleScroll = () => {
+      // Encontrar a secção da timeline
+      const timelineSection = document.getElementById('timeline-section');
+      if (!timelineSection) return;
+
+      const timelineTop = timelineSection.offsetTop;
+      const timelineHeight = timelineSection.offsetHeight;
+      const timelineBottom = timelineTop + timelineHeight;
+      
       const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = Math.min((scrollTop / docHeight) * 100, 100);
-      setScrollProgress(progress);
+      const windowHeight = window.innerHeight;
+      const currentPosition = scrollTop + windowHeight / 2; // Posição central da viewport
+
+      // Calcular progresso apenas dentro da secção da timeline
+      if (currentPosition >= timelineTop && currentPosition <= timelineBottom) {
+        const progressInSection = (currentPosition - timelineTop) / timelineHeight;
+        const progress = Math.min(Math.max(progressInSection * 100, 0), 100);
+        setScrollProgress(progress);
+      } else if (currentPosition < timelineTop) {
+        setScrollProgress(0);
+      } else if (currentPosition > timelineBottom) {
+        setScrollProgress(100);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
+    // Chamar uma vez para definir o estado inicial
+    handleScroll();
+    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -114,7 +135,7 @@ A motivação mantém-se inabalável: fazer do G.C.O. o maior e melhor clube do 
         </div>
       </div>
 
-      <div className="relative py-16">
+      <div id="timeline-section" className="relative py-16">
         <div className="absolute left-1/2 transform -translate-x-0.5 top-0 bottom-0 w-1 bg-gray-300 opacity-40"></div>
         
         <div 
