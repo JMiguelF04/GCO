@@ -1,5 +1,3 @@
-// app/loja/page.tsx
-
 import Image from "next/image";
 import Link from "next/link"
 
@@ -42,7 +40,7 @@ const produtos = [
   },
 ];
 
-export default function LojaPage() {
+export default function LojaPage() {              {/* Usar Snipcart quando pusermos em produção */}
   return (
     <main className="min-h-screen bg-gradient-to-b from-blue-800 via-black to-yellow-400 text-white py-12">
       <div className="max-w-6xl mx-auto px-4">
