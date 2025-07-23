@@ -33,8 +33,9 @@ const Navbar = () => {
 
   const clube = [
     { name: 'História', href: '/historia' },
+    { name:'Altetas', href:'#'},
     { name: 'Ser Sócio', href: '/ser_socio' },
-    { name: 'Contactos', href: '/contactos' },
+    { name: 'Contactos', href: '/contactos' }
   ];
 
   const toggleDropdown = (dropdown: string) => {
@@ -137,11 +138,10 @@ const Navbar = () => {
             </div>
 
             <Link
-              href="/atletas"
+              href="/loja"
               className="text-white hover:text-yellow-200 font-medium transition-colors"
             >
-              {/* Em principio isto é para tirar da Navbar */}
-              Altetas
+              Loja Oficial
             </Link>
 
             <Link
