@@ -35,26 +35,21 @@ export default function ModalidadeCard({ modalidade }: ModalidadeCardProps) {
         {descricao}
       </p>
       <div className="flex justify-between items-center">
-        {ativo ? (
-          <Link
-            href={`/modalidades/${slug}`}
-            className="text-blue-800 font-semibold hover:text-blue-600 transition-colors"
-          >
-            Saiba mais →
-          </Link>
-        ) : (
-          <span className="text-gray-500 font-semibold">
-            Modalidade suspensa
-          </span>
-        )}
+        <Link
+          href={`/modalidades/${slug}`}
+          className={`font-semibold transition-colors ${
+            ativo 
+              ? 'text-blue-800 hover:text-blue-600' 
+              : 'text-gray-600 hover:text-gray-800'
+          }`}
+        >
+          Saiba mais →
+        </Link>
         
         {!ativo && (
-          <Link
-            href="/inscricoes"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
-          >
-            Inscrever-se
-          </Link>
+          <span className="text-gray-500 font-semibold text-sm">
+            Modalidade suspensa
+          </span>
         )}
       </div>
     </div>
