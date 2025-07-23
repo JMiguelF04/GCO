@@ -19,12 +19,6 @@ export interface Modalidade {
     nivel: string;
     grupo: string;
   }[];
-  treinadores: {
-    nome: string;
-    qualificacoes: string[];
-    experiencia: string;
-    foto?: string;
-  }[];
   instalacoes: string[];
   equipamentoNecessario: string[];
   beneficios: string[];
@@ -70,20 +64,6 @@ export const modalidades: Modalidade[] = [
       { dia: "Terça-feira", inicio: "20:00", fim: "22:00", nivel: "Alto Rendimento", grupo: "Juvenis/Juniores (15+ anos)" },
       { dia: "Quinta-feira", inicio: "20:00", fim: "22:00", nivel: "Alto Rendimento", grupo: "Juvenis/Juniores (15+ anos)" },
       { dia: "Sábado", inicio: "10:00", fim: "12:00", nivel: "Alto Rendimento", grupo: "Juvenis/Juniores (15+ anos)" }
-    ],
-    treinadores: [
-      {
-        nome: "Carlos Silva",
-        qualificacoes: ["Treinador Grau II", "Monitor de Andebol", "Curso de Arbitragem"],
-        experiencia: "15 anos de experiência em formação de andebol",
-        foto: "/treinadores/carlos-silva.jpg"
-      },
-      {
-        nome: "Ana Ferreira",
-        qualificacoes: ["Treinadora Grau I", "Especialização em Andebol Feminino"],
-        experiencia: "8 anos de experiência, ex-jogadora da seleção nacional",
-        foto: "/treinadores/ana-ferreira.jpg"
-      }
     ],
     instalacoes: ["Pavilhão Principal", "Campo exterior", "Balneários", "Ginásio de musculação"],
     equipamentoNecessario: ["Equipamento desportivo", "Sapatilhas adequadas", "Proteções (opcional)"],
@@ -153,20 +133,6 @@ export const modalidades: Modalidade[] = [
       { dia: "Quinta-feira", inicio: "19:30", fim: "21:30", nivel: "Avançado", grupo: "13+ anos" },
       { dia: "Sábado", inicio: "09:00", fim: "12:00", nivel: "Competição", grupo: "Selecionados" }
     ],
-    treinadores: [
-      {
-        nome: "Sofia Rodrigues",
-        qualificacoes: ["Treinadora de Ginástica Artística Grau III", "Juíza Nacional", "Especialização em Ginástica Rítmica"],
-        experiencia: "20 anos de experiência, ex-ginasta internacional",
-        foto: "/treinadores/sofia-rodrigues.jpg"
-      },
-      {
-        nome: "Miguel Santos",
-        qualificacoes: ["Treinador de Ginástica Artística Grau II", "Especialização em Ginástica Masculina"],
-        experiencia: "12 anos de experiência em formação",
-        foto: "/treinadores/miguel-santos.jpg"
-      }
-    ],
     instalacoes: ["Ginásio de Ginástica", "Tatamis", "Aparelhos oficiais", "Zona de aquecimento", "Balneários"],
     equipamentoNecessario: ["Fato de ginástica", "Sapatilhas de ginástica", "Proteções para pulsos (opcional)"],
     beneficios: [
@@ -232,14 +198,6 @@ export const modalidades: Modalidade[] = [
       { dia: "Quinta-feira", inicio: "19:00", fim: "21:00", nivel: "Avançado", grupo: "11+ anos" },
       { dia: "Sábado", inicio: "10:00", fim: "13:00", nivel: "Competição", grupo: "Todos os níveis" }
     ],
-    treinadores: [
-      {
-        nome: "Carla Mendes",
-        qualificacoes: ["Treinadora de Patinagem Artística Grau III", "Juíza Regional", "Ex-campeã nacional"],
-        experiencia: "18 anos de experiência, especialista em patinagem livre",
-        foto: "/treinadores/carla-mendes.jpg"
-      }
-    ],
     instalacoes: ["Pista de patinagem", "Zona de aquecimento", "Balneários", "Armazém de equipamentos"],
     equipamentoNecessario: ["Patins artísticos", "Equipamento de proteção", "Roupa adequada", "Capacete (iniciação)"],
     beneficios: [
@@ -303,14 +261,6 @@ export const modalidades: Modalidade[] = [
       { dia: "Quinta-feira", inicio: "19:00", fim: "21:00", nivel: "Avançado", grupo: "15+ anos" },
       { dia: "Sábado", inicio: "14:00", fim: "17:00", nivel: "Competição", grupo: "Todos os níveis" }
     ],
-    treinadores: [
-      {
-        nome: "José Martins",
-        qualificacoes: ["Mestre FIDE", "Treinador Nacional de Xadrez", "Árbitro Internacional"],
-        experiencia: "25 anos de experiência, campeão distrital múltiplas vezes",
-        foto: "/treinadores/jose-martins.jpg"
-      }
-    ],
     instalacoes: ["Sala de xadrez", "Tabuleiros e peças oficiais", "Relógios de xadrez", "Biblioteca de xadrez"],
     equipamentoNecessario: ["Material fornecido pelo clube"],
     beneficios: [
@@ -368,7 +318,6 @@ export const modalidades: Modalidade[] = [
       equipamento: 150
     },
     horarios: [],
-    treinadores: [],
     instalacoes: ["Pavilhão", "Balneários", "Arrecadação de material"],
     equipamentoNecessario: ["Patins de hóquei", "Stick", "Equipamento de proteção completo", "Capacete obrigatório"],
     beneficios: [

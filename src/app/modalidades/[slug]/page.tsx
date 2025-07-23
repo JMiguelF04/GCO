@@ -1,6 +1,8 @@
 import { getModalidadeBySlug, Modalidade } from "@/data/modalidades";
+import { getTreinadoresByModalidade } from "@/data/treinadores";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 interface ModalidadePageProps {
   params: Promise<{
@@ -15,6 +17,9 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
   if (!modalidade) {
     notFound();
   }
+
+  // Obter treinadores reais da modalidade
+  const treinadoresDaModalidade = getTreinadoresByModalidade(slug);
 
   return (
     <main className="min-h-screen bg-gray-50 py-12">
@@ -112,16 +117,28 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900">Treinadores</h3>
-                    <p className="text-sm text-gray-600">{modalidade.treinadores.length} profissional{modalidade.treinadores.length !== 1 ? 'is' : ''}</p>
+                    <p className="text-sm text-gray-600">{treinadoresDaModalidade.length} profissional{treinadoresDaModalidade.length !== 1 ? 'is' : ''}</p>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  {modalidade.treinadores.map((treinador, index) => (
-                    <div key={index} className="text-sm">
-                      <p className="font-medium text-gray-900">{treinador.nome}</p>
-                      <p className="text-gray-600">{treinador.experiencia}</p>
+                  {treinadoresDaModalidade.slice(0, 3).map((treinador) => (
+                    <div key={treinador.id} className="text-sm">
+                      <p className="font-medium text-gray-900">{treinador.nomeCompleto}</p>
+                      <p className="text-gray-600">{treinador.qualificacoes.nivel_treinador}</p>
+                      <p className="text-xs text-gray-500">{treinador.experiencia.anos_experiencia} anos de experiência</p>
                     </div>
                   ))}
+                  {treinadoresDaModalidade.length > 3 && (
+                    <p className="text-xs text-gray-500 mt-2">+ {treinadoresDaModalidade.length - 3} mais...</p>
+                  )}
+                  {treinadoresDaModalidade.length > 0 && (
+                    <Link 
+                      href={`/modalidades/${modalidade.slug}/treinadores`}
+                      className="text-xs text-blue-600 hover:text-blue-800 mt-2 inline-block font-medium"
+                    >
+                      Ver todos os treinadores →
+                    </Link>
+                  )}
                 </div>
               </div>
 
@@ -226,25 +243,106 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                 {/* Treinadores Detalhados */}
                 <div className="bg-white rounded-xl shadow-md p-6">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">Equipa Técnica</h2>
-                  <div className="space-y-6">
-                    {modalidade.treinadores.map((treinador, index) => (
-                      <div key={index} className="border-b border-gray-100 last:border-0 pb-4 last:pb-0">
-                        <h3 className="font-bold text-gray-900 mb-2">{treinador.nome}</h3>
-                        <p className="text-gray-600 text-sm mb-2">{treinador.experiencia}</p>
-                        <div className="space-y-1">
-                          <p className="text-sm font-medium text-gray-700">Qualificações:</p>
-                          <ul className="space-y-1">
-                            {treinador.qualificacoes.map((qualificacao, qIndex) => (
-                              <li key={qIndex} className="text-sm text-gray-600 flex items-center">
-                                <span className="text-blue-500 mr-2">•</span>
-                                {qualificacao}
-                              </li>
-                            ))}
-                          </ul>
+                  {treinadoresDaModalidade.length === 0 ? (
+                    <p className="text-gray-600">Equipa técnica em formação.</p>
+                  ) : (
+                    <div className="space-y-6">
+                      {treinadoresDaModalidade.map((treinador) => (
+                        <div key={treinador.id} className="border-b border-gray-100 last:border-0 pb-6 last:pb-0">
+                          <div className="flex flex-col lg:flex-row lg:items-start gap-4">
+                            {/* Foto do Treinador */}
+                            <div className="flex-shrink-0">
+                              <div className="w-20 h-20 relative rounded-lg overflow-hidden">
+                                {treinador.foto ? (
+                                  <Image
+                                    src={treinador.foto}
+                                    alt={`Foto de ${treinador.nomeCompleto}`}
+                                    fill
+                                    className="object-cover"
+                                  />
+                                ) : (
+                                  <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+                                    <span className="text-2xl text-blue-600">👤</span>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+
+                            {/* Informações do Treinador */}
+                            <div className="flex-1">
+                              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-2">
+                                <h3 className="font-bold text-gray-900 text-lg">{treinador.nomeCompleto}</h3>
+                                <div className="flex gap-2 mt-2 lg:mt-0">
+                                  <span className="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">
+                                    {treinador.experiencia.anos_experiencia} anos
+                                  </span>
+                                  <span className="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
+                                    {treinador.anos_no_clube} anos no GCO
+                                  </span>
+                                </div>
+                              </div>
+
+                              <p className="text-gray-600 text-sm mb-3">{treinador.qualificacoes.nivel_treinador}</p>
+                              
+                              {/* Categorias que treina */}
+                              <div className="mb-3">
+                                <p className="text-sm font-medium text-gray-700 mb-1">Categorias:</p>
+                                <div className="flex flex-wrap gap-1">
+                                  {treinador.categorias.map((categoria, index) => (
+                                    <span key={index} className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded">
+                                      {categoria}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+
+                              {/* Principais qualificações */}
+                              <div className="mb-3">
+                                <p className="text-sm font-medium text-gray-700 mb-1">Principais Qualificações:</p>
+                                <ul className="space-y-1">
+                                  {treinador.qualificacoes.certificacoes.slice(0, 3).map((qualificacao, qIndex) => (
+                                    <li key={qIndex} className="text-sm text-gray-600 flex items-center">
+                                      <span className="text-blue-500 mr-2">•</span>
+                                      {qualificacao}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+
+                              {/* Especialidades */}
+                              {treinador.experiencia.especialidades.length > 0 && (
+                                <div className="mb-3">
+                                  <p className="text-sm font-medium text-gray-700 mb-1">Especialidades:</p>
+                                  <div className="flex flex-wrap gap-1">
+                                    {treinador.experiencia.especialidades.slice(0, 4).map((especialidade, index) => (
+                                      <span key={index} className="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">
+                                        {especialidade}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+
+                              {/* Principais conquistas */}
+                              {treinador.experiencia.conquistas_como_treinador.length > 0 && (
+                                <div>
+                                  <p className="text-sm font-medium text-gray-700 mb-1">Principais Conquistas:</p>
+                                  <ul className="space-y-1">
+                                    {treinador.experiencia.conquistas_como_treinador.slice(0, 2).map((conquista, cIndex) => (
+                                      <li key={cIndex} className="text-sm text-gray-600 flex items-center">
+                                        <span className="text-yellow-500 mr-2">🏆</span>
+                                        {conquista}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Competições */}
@@ -310,6 +408,25 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Botões de Ação */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+              <Link
+                href={`/modalidades/${modalidade.slug}/atletas`}
+                className="bg-white border-2 border-blue-600 text-blue-600 py-4 px-6 rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300 text-center font-semibold shadow-md hover:shadow-lg flex items-center justify-center"
+              >
+                <span className="mr-2">👥</span>
+                Ver Atletas da Modalidade
+              </Link>
+              
+              <Link
+                href={`/modalidades/${modalidade.slug}/treinadores`}
+                className="bg-white border-2 border-green-600 text-green-600 py-4 px-6 rounded-xl hover:bg-green-600 hover:text-white transition-all duration-300 text-center font-semibold shadow-md hover:shadow-lg flex items-center justify-center"
+              >
+                <span className="mr-2">🎯</span>
+                Ver Equipa Técnica
+              </Link>
             </div>
 
             {/* Contacto e Inscrição */}
