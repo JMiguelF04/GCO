@@ -34,28 +34,25 @@ export default function SerSocioPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
-
-        <nav className="mb-8">
-          <div className="flex items-center space-x-2 text-sm text-gray-500">
-            <Link href="/" className="hover:text-blue-600">Início</Link>
-            <span>/</span>
-            <span className="text-gray-900">Ser Sócio</span>
-          </div>
-        </nav>
-
-
         <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
           <div className="relative h-64 sm:h-80 md:h-96">
             <Image
-              src="/gco_exterior.png"
+              src="/gco-exterior.jpg"
               alt="Ser Sócio GCO"
               fill
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-blue-700 via-black to-yellow-400 bg-opacity-50 flex items-center justify-center">
-              <h1 className="text-white text-4xl font-bold text-center">Ser Sócio do Ginásio Clube de Odivelas</h1>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <h1
+                style={{
+                  backgroundColor: 'rgba(255,255,255,0.75)', 
+                  color: '#000498'
+                }}
+                className="rounded-xl py-1 px-1 text-4xl font-bold text-center"
+              >
+                Ser Sócio do Ginásio Clube de Odivelas
+              </h1>
             </div>
           </div>
         </div>
@@ -83,12 +80,12 @@ export default function SerSocioPage() {
                 A preencher
               </p>
               <p className="mt-2">
-                Exemplo de texto aqui mesmo
+                Exemplo de texto 
                 <a href="mailto:transferencias@gcodivelas.pt" className="text-blue-600 hover:underline ml-1">123456789</a>.
               </p>
 
               <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
-                Exemplo de texto aqui também blah blah blah
+                Exemplo de texto aqui também 
               </div>
 
                 <AccordionSection title="Parcerias e Descontos">

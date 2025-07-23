@@ -95,16 +95,16 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Mensalidade:</span>
-                    <span className="font-semibold">{modalidade.preco.mensalidade}€</span>
+                    <span className="font-semibold text-black">{modalidade.preco.mensalidade}€</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Inscrição:</span>
-                    <span className="font-semibold">{modalidade.preco.inscricao}€</span>
+                    <span className="font-semibold text-black">{modalidade.preco.inscricao}€</span>
                   </div>
                   {modalidade.preco.equipamento && (
                     <div className="flex justify-between">
                       <span className="text-gray-600">Equipamento:</span>
-                      <span className="font-semibold">{modalidade.preco.equipamento}€</span>
+                      <span className="font-semibold text-black">{modalidade.preco.equipamento}€</span>
                     </div>
                   )}
                 </div>
@@ -149,7 +149,7 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900">Horários</h3>
-                    <p className="text-sm text-gray-600">{modalidade.horarios.length} sessões/semana</p>
+                    <p className="text-sm text-gray-600 text-black">{modalidade.horarios.length} sessões/semana</p>
                   </div>
                 </div>
                 <div className="text-sm text-gray-600">
@@ -218,9 +218,9 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b">
-                          <th className="text-left py-2 font-semibold">Dia</th>
-                          <th className="text-left py-2 font-semibold">Horário</th>
-                          <th className="text-left py-2 font-semibold">Nível</th>
+                          <th className="text-left py-2 font-semibold text-black">Dia</th>
+                          <th className="text-left py-2 font-semibold text-black">Horário</th>
+                          <th className="text-left py-2 font-semibold text-black">Nível</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -324,7 +324,7 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                               )}
 
                               {/* Principais conquistas */}
-                              {treinador.experiencia.conquistas_como_treinador.length > 0 && (
+                              {Array.isArray(treinador.experiencia.conquistas_como_treinador) && treinador.experiencia.conquistas_como_treinador.length > 0 && (
                                 <div>
                                   <p className="text-sm font-medium text-gray-700 mb-1">Principais Conquistas:</p>
                                   <ul className="space-y-1">

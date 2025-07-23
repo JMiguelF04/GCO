@@ -103,7 +103,6 @@ A motivação mantém-se inabalável: fazer do G.C.O. o maior e melhor clube do 
     'Comissão Instaladora do Município de Odivelas',
     'Câmara Municipal de Odivelas',
     'Junta de Freguesia de Odivelas',
-    'Governo Civil de Lisboa',
     'Instituto Nacional de Desporto',
     'Todas as entidades privadas que têm contribuído para a nossa missão'
   ];

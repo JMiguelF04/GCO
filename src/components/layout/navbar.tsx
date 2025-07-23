@@ -33,7 +33,6 @@ const Navbar = () => {
 
   const clube = [
     { name: 'História', href: '/historia' },
-    { name:'Altetas', href:'#'},
     { name: 'Ser Sócio', href: '/ser_socio' },
     { name: 'Contactos', href: '/contactos' }
   ];

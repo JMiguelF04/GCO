@@ -6,7 +6,7 @@ export default function Page() {
         
         <div className="bg-white shadow-md rounded-lg p-6">
           <p className="text-lg text-gray-700 mb-6">
-            Confira abaixo os horários das nossas modalidades. Para mais informações, entre em contato com a secretaria.
+            Consulte abaixo os horários das nossas modalidades. Para mais informações, entre em contato com a secretaria.
           </p>
           
           <div className="border-t border-gray-200 pt-6">
@@ -15,42 +15,42 @@ export default function Page() {
               <table className="min-w-full bg-white">
                 <thead>
                   <tr className="bg-blue-100">
-                    <th className="py-3 px-4 text-left">Escalão</th>
-                    <th className="py-3 px-4 text-left">Dias</th>
-                    <th className="py-3 px-4 text-left">Horário</th>
-                    <th className="py-3 px-4 text-left">Local</th>
+                    <th className="py-3 px-4 text-left text-black">Escalão</th>
+                    <th className="py-3 px-4 text-left text-black">Dias</th>
+                    <th className="py-3 px-4 text-left text-black">Horário</th>
+                    <th className="py-3 px-4 text-left text-black">Local</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-black">
                   <tr>
-                    <td className="py-3 px-4">Infantis</td>
-                    <td className="py-3 px-4">Terças e Quintas</td>
-                    <td className="py-3 px-4">18h00-19h30</td>
-                    <td className="py-3 px-4">Pavilhão Principal</td>
+                    <td className="py-3 px-4 text-black">Infantis</td>
+                    <td className="py-3 px-4 text-black">Terças e Quintas</td>
+                    <td className="py-3 px-4 text-black">18h00-19h30</td>
+                    <td className="py-3 px-4 text-black">Pavilhão Principal</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4">Iniciados</td>
-                    <td className="py-3 px-4">Segundas e Quartas</td>
-                    <td className="py-3 px-4">18h00-19h30</td>
-                    <td className="py-3 px-4">Pavilhão Principal</td>
+                    <td className="py-3 px-4 text-black">Iniciados</td>
+                    <td className="py-3 px-4 text-black">Segundas e Quartas</td>
+                    <td className="py-3 px-4 text-black">18h00-19h30</td>
+                    <td className="py-3 px-4 text-black">Pavilhão Principal</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4">Juvenis</td>
-                    <td className="py-3 px-4">Terças e Quintas</td>
-                    <td className="py-3 px-4">19h30-21h00</td>
-                    <td className="py-3 px-4">Pavilhão Principal</td>
+                    <td className="py-3 px-4 text-black">Juvenis</td>
+                    <td className="py-3 px-4 text-black">Terças e Quintas</td>
+                    <td className="py-3 px-4 text-black">19h30-21h00</td>
+                    <td className="py-3 px-4 text-black">Pavilhão Principal</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4">Juniores</td>
-                    <td className="py-3 px-4">Segundas e Quartas</td>
-                    <td className="py-3 px-4">19h30-21h00</td>
-                    <td className="py-3 px-4">Pavilhão Principal</td>
+                    <td className="py-3 px-4 text-black">Juniores</td>
+                    <td className="py-3 px-4 text-black">Segundas e Quartas</td>
+                    <td className="py-3 px-4 text-black">19h30-21h00</td>
+                    <td className="py-3 px-4 text-black">Pavilhão Principal</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4">Seniores</td>
-                    <td className="py-3 px-4">Terças, Quintas e Sextas</td>
-                    <td className="py-3 px-4">21h00-22h30</td>
-                    <td className="py-3 px-4">Pavilhão Principal</td>
+                    <td className="py-3 px-4 text-black">Seniores</td>
+                    <td className="py-3 px-4 text-black">Terças, Quintas e Sextas</td>
+                    <td className="py-3 px-4 text-black">21h00-22h30</td>
+                    <td className="py-3 px-4 text-black">Pavilhão Principal</td>
                   </tr>
                 </tbody>
               </table>
@@ -63,42 +63,42 @@ export default function Page() {
               <table className="min-w-full bg-white">
                 <thead>
                   <tr className="bg-blue-100">
-                    <th className="py-3 px-4 text-left">Escalão</th>
-                    <th className="py-3 px-4 text-left">Dias</th>
-                    <th className="py-3 px-4 text-left">Horário</th>
-                    <th className="py-3 px-4 text-left">Local</th>
+                    <th className="py-3 px-4 text-left text-black">Escalão</th>
+                    <th className="py-3 px-4 text-left text-black">Dias</th>
+                    <th className="py-3 px-4 text-left text-black">Horário</th>
+                    <th className="py-3 px-4 text-left text-black">Local</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-black">
                   <tr>
-                    <td className="py-3 px-4">Baby Gym (4-5 anos)</td>
-                    <td className="py-3 px-4">Terças e Quintas</td>
-                    <td className="py-3 px-4">17h00-18h00</td>
-                    <td className="py-3 px-4">Sala de Ginástica</td>
+                    <td className="py-3 px-4 text-black">Baby Gym (4-5 anos)</td>
+                    <td className="py-3 px-4 text-black">Terças e Quintas</td>
+                    <td className="py-3 px-4 text-black">17h00-18h00</td>
+                    <td className="py-3 px-4 text-black">Sala de Ginástica</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4">Iniciação (6-8 anos)</td>
-                    <td className="py-3 px-4">Segundas e Quartas</td>
-                    <td className="py-3 px-4">17h00-18h30</td>
-                    <td className="py-3 px-4">Sala de Ginástica</td>
+                    <td className="py-3 px-4 text-black">Iniciação (6-8 anos)</td>
+                    <td className="py-3 px-4 text-black">Segundas e Quartas</td>
+                    <td className="py-3 px-4 text-black">17h00-18h30</td>
+                    <td className="py-3 px-4 text-black">Sala de Ginástica</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4">Formação (9-12 anos)</td>
-                    <td className="py-3 px-4">Terças, Quintas e Sextas</td>
-                    <td className="py-3 px-4">18h00-19h30</td>
-                    <td className="py-3 px-4">Sala de Ginástica</td>
+                    <td className="py-3 px-4 text-black">Formação (9-12 anos)</td>
+                    <td className="py-3 px-4 text-black">Terças, Quintas e Sextas</td>
+                    <td className="py-3 px-4 text-black">18h00-19h30</td>
+                    <td className="py-3 px-4 text-black">Sala de Ginástica</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4">Avançado (13+ anos)</td>
-                    <td className="py-3 px-4">Segunda a Sexta</td>
-                    <td className="py-3 px-4">19h30-21h30</td>
-                    <td className="py-3 px-4">Sala de Ginástica</td>
+                    <td className="py-3 px-4 text-black">Avançado (13+ anos)</td>
+                    <td className="py-3 px-4 text-black">Segunda a Sexta</td>
+                    <td className="py-3 px-4 text-black">19h30-21h30</td>
+                    <td className="py-3 px-4 text-black">Sala de Ginástica</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4">Adultos</td>
-                    <td className="py-3 px-4">Segundas, Quartas e Sextas</td>
-                    <td className="py-3 px-4">20h00-21h00</td>
-                    <td className="py-3 px-4">Sala Multiusos</td>
+                    <td className="py-3 px-4 text-black">Adultos</td>
+                    <td className="py-3 px-4 text-black">Segundas, Quartas e Sextas</td>
+                    <td className="py-3 px-4 text-black">20h00-21h00</td>
+                    <td className="py-3 px-4 text-black">Sala Multiusos</td>
                   </tr>
                 </tbody>
               </table>

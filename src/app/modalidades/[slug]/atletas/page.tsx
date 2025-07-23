@@ -37,12 +37,12 @@ export default function AtletasPage({ params }: AtletasPageProps) {
             <table className="min-w-full bg-grey-600 shadow rounded-lg">
               <thead>
                 <tr className="bg-blue-900 text-left">
-                  <th className="py-3 px-4 text-white">Nome</th>
+                  <th className="py-3 px-5 text-white">Nome</th>
                   <th className="py-3 px-4 text-white">Idade</th>
                   <th className="py-3 px-4 text-white">Categoria</th>
                   <th className="py-3 px-4 text-white">Posição</th>
                   <th className="py-3 px-4 text-white">Anos no Clube</th>
-                  <th className="py-3 px-4 text-white text-center">Detalhes</th>
+                  <th className="py-3 px-5 text-white text-center">Detalhes</th>
                 </tr>
               </thead>
               <tbody>
@@ -56,7 +56,7 @@ export default function AtletasPage({ params }: AtletasPageProps) {
                     <td className="py-2 px-4 text-center">
                       <Link 
                         href={`/modalidades/${modalidade.slug}/atletas/${atleta.id}`} 
-                        className="bg-blue-900 text-white hover:bg-blue-800 py-1 px-3 rounded-lg text-center transition-colors"
+                        className="bg-blue-900 text-white hover:bg-blue-800 py-1 px-2 rounded-lg text-center transition-colors"
                       >
                         Ver →
                       </Link>
