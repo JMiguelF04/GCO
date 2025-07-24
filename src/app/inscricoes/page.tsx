@@ -1,5 +1,7 @@
+
 import { modalidades } from "@/data/modalidades";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function InscricoesPage() {
   return (
@@ -24,7 +26,19 @@ export default function InscricoesPage() {
               <div key={index} className="border-b border-gray-200 pb-6 last:border-0 last:pb-0">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <div className="text-3xl mr-4">{modalidade.icone}</div>
+                    <div className="mr-4 flex items-center justify-center" style={{ width: 40, height: 40 }}>
+                      {typeof modalidade.icone === 'string' && modalidade.icone.startsWith('/') ? (
+                        <Image
+                          src={modalidade.icone}
+                          alt={modalidade.nome}
+                          width={32}
+                          height={32}
+                          className="object-contain"
+                        />
+                      ) : (
+                        <span className="text-3xl">{modalidade.icone}</span>
+                      )}
+                    </div>
                     <div>
                       <h3 className="text-lg font-semibold text-gray-800">
                         {modalidade.nome}
