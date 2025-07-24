@@ -45,8 +45,21 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
             <div className="absolute inset-0 bg-black/10"></div>
             <div className="relative z-10">
               <div className="flex items-center">
-                <div className="text-6xl mr-6 filter drop-shadow-lg">
-                  {modalidade.icone}
+                <div
+                  className="bg-white rounded-xl mr-6 filter drop-shadow-lg flex items-center justify-center"
+                  style={{ width: 100, height: 100 }}
+                >
+                  {modalidade.icone.startsWith("/") ? (
+                    <Image
+                      src={modalidade.icone}
+                      alt={modalidade.nome}
+                      width={150}
+                      height={80}
+                      className="object-contain"
+                    />
+                  ) : (
+                    <span className="text-6xl">{modalidade.icone}</span>
+                  )}
                 </div>
                 <div>
                   <h1 className="text-4xl font-bold mb-2">
@@ -117,7 +130,7 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900">Treinadores</h3>
-                    <p className="text-sm text-gray-600">{treinadoresDaModalidade.length} profissional{treinadoresDaModalidade.length !== 1 ? 'is' : ''}</p>
+                    <p className="text-sm text-gray-600">{treinadoresDaModalidade.length} profissiona{treinadoresDaModalidade.length !== 1 ? 'is' : ''}</p>
                   </div>
                 </div>
                 <div className="space-y-2">

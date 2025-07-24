@@ -111,23 +111,6 @@ export default function AtletaDetalhePage({ params }: AtletaPageProps) {
                   </div>
                 </div>
               </div>
-
-              {/* Horários de Treino */}
-              {atleta.horario_treino.length > 0 && (
-                <div className="mt-6">
-                  <h2 className="text-xl font-semibold mb-4 text-gray-800 border-b border-gray-200 pb-2">
-                    Horários de Treino
-                  </h2>
-                  <div className="space-y-2">
-                    {atleta.horario_treino.map((horario, index) => (
-                      <div key={index} className="bg-blue-50 px-3 py-2 rounded-lg text-black">
-                        📅 {horario}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
               {/* Estatísticas */}
               {atleta.estatisticas && (
                 <div className="mt-6">

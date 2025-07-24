@@ -105,26 +105,38 @@ export default function TreinadorDetalhePage({ params }: TreinadorPageProps) {
                     ))}
                   </div>
                 </div>
-
-                {/* Horários */}
-                {treinador.horarios.treinos_semanais.length > 0 && (
+                {/* Estatísticas */}
+                {treinador.estatisticas && (
                   <div className="bg-gray-50 rounded-lg p-6">
                     <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                      <span className="mr-2">📅</span>
-                      Horários de Treino
+                      <span className="mr-2">📊</span>
+                      Estatísticas
                     </h2>
-                    <div className="space-y-3">
-                      {treinador.horarios.treinos_semanais.map((treino, index) => (
-                        <div key={index} className="bg-white p-4 rounded-lg border border-gray-200">
-                          <div className="flex justify-between items-center">
-                            <div>
-                              <span className="font-medium text-gray-900">{treino.dia}</span>
-                              <p className="text-sm text-gray-600">{treino.categoria}</p>
-                            </div>
-                            <span className="text-blue-600 font-medium">{treino.horario}</span>
+                    <div className="grid grid-cols-3 gap-4">
+                      {treinador.estatisticas.atletas_formados && (
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-blue-600">
+                            {treinador.estatisticas.atletas_formados}
                           </div>
+                          <div className="text-sm text-gray-600">Atletas Formados</div>
                         </div>
-                      ))}
+                      )}
+                      {treinador.estatisticas.titulos_conquistados && (
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-yellow-600">
+                            {treinador.estatisticas.titulos_conquistados}
+                          </div>
+                          <div className="text-sm text-gray-600">Títulos</div>
+                        </div>
+                      )}
+                      {treinador.estatisticas.anos_carreira && (
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-green-600">
+                            {treinador.estatisticas.anos_carreira}
+                          </div>
+                          <div className="text-sm text-gray-600">Anos Carreira</div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}
@@ -202,42 +214,6 @@ export default function TreinadorDetalhePage({ params }: TreinadorPageProps) {
                     </div>
                   </div>
                 </div>
-
-                {/* Estatísticas */}
-                {treinador.estatisticas && (
-                  <div className="bg-gray-50 rounded-lg p-6">
-                    <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                      <span className="mr-2">📊</span>
-                      Estatísticas
-                    </h2>
-                    <div className="grid grid-cols-3 gap-4">
-                      {treinador.estatisticas.atletas_formados && (
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-blue-600">
-                            {treinador.estatisticas.atletas_formados}
-                          </div>
-                          <div className="text-sm text-gray-600">Atletas Formados</div>
-                        </div>
-                      )}
-                      {treinador.estatisticas.titulos_conquistados && (
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-yellow-600">
-                            {treinador.estatisticas.titulos_conquistados}
-                          </div>
-                          <div className="text-sm text-gray-600">Títulos</div>
-                        </div>
-                      )}
-                      {treinador.estatisticas.anos_carreira && (
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-green-600">
-                            {treinador.estatisticas.anos_carreira}
-                          </div>
-                          <div className="text-sm text-gray-600">Anos Carreira</div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
 

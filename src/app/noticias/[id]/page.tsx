@@ -69,7 +69,7 @@ export default async function NoticiaPage({ params }: NoticiaPageProps) {
               
               {/* Conteúdo expandido baseado no ID */}
               {noticiaId === 1 && (
-                <div className="space-y-4">
+                <div className="space-y-4 text-black text-black">
                   <p>
                     A nossa equipa de Andebol continua a demonstrar excelência no campo, conquistando mais uma vitória importante na Taça INATEL Andebol Lisboa 2025. Com um resultado de 27-18 contra o Liberdade FC, os nossos atletas mostraram determinação e técnica apurada.
                   </p>
@@ -83,7 +83,7 @@ export default async function NoticiaPage({ params }: NoticiaPageProps) {
               )}
               
               {noticiaId === 2 && (
-                <div className="space-y-4">
+                <div className="space-y-4 text-black">
                   <p>
                     No passado dia 24 de Maio, realizou-se a última jornada do Campeonato Distrital da 2ª Divisão de Clássicas da Associação de Xadrez de Lisboa. A nossa representação teve uma prestação notável ao longo de toda a competição.
                   </p>
@@ -97,7 +97,7 @@ export default async function NoticiaPage({ params }: NoticiaPageProps) {
               )}
               
               {noticiaId === 3 && (
-                <div className="space-y-4">
+                <div className="space-y-4 text-black">
                   <p>
                     Foi disponibilizada uma nova publicação na Pasta de Apoio da Plataforma da Patinagem Artística da Federação de Patinagem de Portugal, contendo o Regulamento Geral da Patinagem Artística.
                   </p>
@@ -111,7 +111,7 @@ export default async function NoticiaPage({ params }: NoticiaPageProps) {
               )}
               
               {noticiaId === 4 && (
-                <div className="space-y-4">
+                <div className="space-y-4 text-black">
                   <p>
                     O Ginásio Clube de Odivelas (GCO) apresenta com orgulho a sua Caderneta Oficial 2024-25, documento que reflete os 46 anos de história e dedicação ao desporto da nossa instituição.
                   </p>

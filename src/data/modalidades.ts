@@ -43,7 +43,7 @@ export const modalidades: Modalidade[] = [
   {
     nome: "Andebol",
     slug: "andebol",
-    icone: "🤾‍♂️",
+    icone: "/icones-modalidades/andebol.png",
     descricao: "Equipas competitivas em várias categorias etárias",
     ativo: true,
     categoria: "Desporto Coletivo",
@@ -111,7 +111,7 @@ export const modalidades: Modalidade[] = [
   {
     nome: "Ginástica",
     slug: "ginastica",
-    icone: "🤸‍♀️",
+    icone: "/icones-modalidades/ginastica.png",
     descricao: "Ginástica artística e rítmica para todas as idades",
     ativo: true,
     categoria: "Desporto Individual",
@@ -179,7 +179,7 @@ export const modalidades: Modalidade[] = [
   {
     nome: "Patinagem Artística",
     slug: "patinagem-artistica",
-    icone: "⛸️",
+    icone: "/icones-modalidades/patinagem.png",
     descricao: "Formação e competição em patinagem artística",
     ativo: true,
     categoria: "Desporto Individual",
@@ -244,7 +244,7 @@ export const modalidades: Modalidade[] = [
   {
     nome: "Xadrez",
     slug: "xadrez",
-    icone: "♟️",
+    icone: "/icones-modalidades/xadrez.png",
     descricao: "Desenvolvimento estratégico e competições",
     ativo: true,
     categoria: "Desporto Mental",
@@ -307,7 +307,7 @@ export const modalidades: Modalidade[] = [
   {
     nome: "Hóquei em Patins",
     slug: "hoquei-em-patins",
-    icone: "🏒",
+    icone: "/icones-modalidades/hoquei.png",
     descricao: "Modalidade temporariamente suspensa devido ao não cumprimento de regulamentações",
     ativo: false,
     categoria: "Desporto Coletivo",
