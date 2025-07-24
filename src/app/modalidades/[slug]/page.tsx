@@ -130,15 +130,15 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900">Treinadores</h3>
-                    <p className="text-sm text-gray-600">{treinadoresDaModalidade.length} profissiona{treinadoresDaModalidade.length !== 1 ? 'is' : ''}</p>
+                    <p className="text-sm text-gray-600">{treinadoresDaModalidade.length} profissiona{treinadoresDaModalidade.length == 1 ? 'l' : ''}{treinadoresDaModalidade.length !== 1 ? 'is' : ''}</p>
                   </div>
                 </div>
                 <div className="space-y-2">
                   {treinadoresDaModalidade.slice(0, 3).map((treinador) => (
                     <div key={treinador.id} className="text-sm">
-                      <p className="font-medium text-gray-900">{treinador.nomeCompleto}</p>
-                      <p className="text-gray-600">{treinador.qualificacoes.nivel_treinador}</p>
-                      <p className="text-xs text-gray-500">{treinador.experiencia.anos_experiencia} anos de experiência</p>
+                      <p className="font-medium text-white bg-blue-700 font-semibold text-center rounded-xl">{treinador.nomeCompleto}</p>
+                      <p className="text-gray-600 text-center">{treinador.qualificacoes.nivel_treinador}</p>
+                      <p className="text-xs text-gray-500 text-center">{treinador.experiencia.anos_experiencia} anos de experiência</p>
                     </div>
                   ))}
                   {treinadoresDaModalidade.length > 3 && (
@@ -183,32 +183,6 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                   </p>
                 </div>
 
-                {/* Objetivos */}
-                <div className="bg-white rounded-xl shadow-md p-6">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Objetivos</h2>
-                  <ul className="space-y-2">
-                    {modalidade.detalhes.objetivos.map((objetivo, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="text-blue-600 mr-2 mt-1">•</span>
-                        <span className="text-gray-700">{objetivo}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Benefícios */}
-                <div className="bg-white rounded-xl shadow-md p-6">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefícios</h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {modalidade.beneficios.map((beneficio, index) => (
-                      <div key={index} className="flex items-center">
-                        <span className="text-green-500 mr-2">✓</span>
-                        <span className="text-gray-700 text-sm">{beneficio}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
                 {/* Níveis */}
                 <div className="bg-white rounded-xl shadow-md p-6">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">Níveis Disponíveis</h2>
@@ -218,6 +192,52 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                         <span className="font-medium text-blue-900">{nivel}</span>
                       </div>
                     ))}
+                  </div>
+                </div>
+                {/* Competições */}
+                {modalidade.competicoes.length > 0 && (
+                  <div className="bg-white rounded-xl shadow-md p-6">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Competições</h2>
+                    <div className="space-y-2">
+                      {modalidade.competicoes.map((competicao, index) => (
+                        <div key={index} className="flex items-center">
+                          <span className="text-yellow-500 mr-2">🏆</span>
+                          <span className="text-gray-700 text-sm">{competicao}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Equipamento */}
+                <div className="bg-white rounded-xl shadow-md p-6">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Equipamento Necessário</h2>
+                  <div className="space-y-2">
+                    {modalidade.equipamentoNecessario.map((item, index) => (
+                      <div key={index} className="flex items-center">
+                        <span className="text-blue-500 mr-2">•</span>
+                        <span className="text-gray-700 text-sm">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                {/* Metodologia */}
+                <div className="bg-white rounded-xl shadow-md p-6 mb-6">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Metodologia</h2>
+                  <p className="text-gray-700 leading-relaxed">{modalidade.detalhes.metodologia}</p>
+                </div>
+                {/* Avaliação e Progressão */}
+                <div className="bg-white rounded-xl shadow-md p-6">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Avaliação e Progressão</h2>
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-2">Avaliação:</h3>
+                      <p className="text-gray-700 text-sm">{modalidade.detalhes.avaliacao}</p>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-2">Progressão:</h3>
+                      <p className="text-gray-700 text-sm">{modalidade.detalhes.progressao}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -357,71 +377,10 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                     </div>
                   )}
                 </div>
-
-                {/* Competições */}
-                {modalidade.competicoes.length > 0 && (
-                  <div className="bg-white rounded-xl shadow-md p-6">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Competições</h2>
-                    <div className="space-y-2">
-                      {modalidade.competicoes.map((competicao, index) => (
-                        <div key={index} className="flex items-center">
-                          <span className="text-yellow-500 mr-2">🏆</span>
-                          <span className="text-gray-700 text-sm">{competicao}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Equipamento */}
-                <div className="bg-white rounded-xl shadow-md p-6">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Equipamento Necessário</h2>
-                  <div className="space-y-2">
-                    {modalidade.equipamentoNecessario.map((item, index) => (
-                      <div key={index} className="flex items-center">
-                        <span className="text-blue-500 mr-2">•</span>
-                        <span className="text-gray-700 text-sm">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Instalações */}
-                <div className="bg-white rounded-xl shadow-md p-6">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Instalações</h2>
-                  <div className="space-y-2">
-                    {modalidade.instalacoes.map((instalacao, index) => (
-                      <div key={index} className="flex items-center">
-                        <span className="text-green-500 mr-2">✓</span>
-                        <span className="text-gray-700 text-sm">{instalacao}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
             </div>
 
-            {/* Metodologia e Avaliação */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-              <div className="bg-white rounded-xl shadow-md p-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Metodologia</h2>
-                <p className="text-gray-700 leading-relaxed">{modalidade.detalhes.metodologia}</p>
-              </div>
 
-              <div className="bg-white rounded-xl shadow-md p-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Avaliação e Progressão</h2>
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Avaliação:</h3>
-                    <p className="text-gray-700 text-sm">{modalidade.detalhes.avaliacao}</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Progressão:</h3>
-                    <p className="text-gray-700 text-sm">{modalidade.detalhes.progressao}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             {/* Botões de Ação */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">

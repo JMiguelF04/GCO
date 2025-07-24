@@ -1,5 +1,7 @@
+
 import { Modalidade } from "@/data/modalidades";
 import Link from "next/link";
+import Image from "next/image";
 
 interface ModalidadeCardProps {
   modalidade: Modalidade;
@@ -21,8 +23,20 @@ export default function ModalidadeCard({ modalidade }: ModalidadeCardProps) {
           SUSPENSO
         </div>
       )}
-      <div className={`text-4xl mb-4 ${!ativo ? 'filter grayscale' : ''}`}>
-        {icone}
+      <div className={`mb-4 flex items-center justify-center ${!ativo ? 'filter grayscale' : ''}`}
+        style={{ width: 64, height: 64 }}
+      >
+        {typeof icone === 'string' && icone.startsWith('/') ? (
+          <Image
+            src={icone}
+            alt={nome}
+            width={48}
+            height={48}
+            className="object-contain"
+          />
+        ) : (
+          <span className="text-4xl">{icone}</span>
+        )}
       </div>
       <h3 className={`text-xl font-bold mb-2 ${
         ativo ? 'text-blue-900' : 'text-gray-600'
