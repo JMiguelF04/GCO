@@ -674,88 +674,9 @@ export const treinadores: Treinador[] = [
       valor_mensal: 200
     }
   },
-
+]
   // VOLUNTÁRIA - GINÁSTICA BABY GYM
-  {
-    id: 7,
-    nome: "Patrícia",
-    apelido: "Costa",
-    nomeCompleto: "Patrícia Maria Costa",
-    idade: 38,
-    dataNascimento: "1986-09-25",
-    modalidades: ["ginastica"],
-    categorias: ["Baby Gym"],
-    foto: "/treinadores/patricia-costa.jpg",
-    ativo: true,
-    dataInicio: "2022-01-15",
-    anos_no_clube: 2,
-    contacto: {
-      telefone: "918901234",
-      email: "patricia.costa@gco.pt"
-    },
-    endereco: {
-      rua: "Rua das Crianças, 123",
-      codigo_postal: "2675-123",
-      localidade: "Odivelas"
-    },
-    qualificacoes: {
-      nivel_treinador: "Monitor de Baby Gym",
-      certificacoes: [
-        "Monitor de Baby Gym - FGP",
-        "Curso de Primeiros Socorros Pediátricos",
-        "Animação Infantil"
-      ],
-      formacao_academica: "Licenciatura em Educação de Infância - ESE",
-      cursos_especializacao: [
-        "Desenvolvimento Motor 0-6 anos",
-        "Psicomotricidade Infantil"
-      ],
-      licencas_validas: [
-        "Certificado Baby Gym válido até 2025"
-      ]
-    },
-    experiencia: {
-      anos_experiencia: 5,
-      especialidades: [
-        "Trabalho com crianças dos 3-6 anos",
-        "Desenvolvimento psicomotor",
-        "Atividades lúdicas",
-        "Coordenação motora"
-      ]
-    },
-    horarios: {
-      disponibilidade: [
-        "Segunda, Quarta: 17:00-19:00"
-      ],
-      treinos_semanais: [
-        {
-          dia: "Segunda-feira",
-          horario: "17:00-18:00",
-          categoria: "Baby Gym",
-          modalidade: "ginastica"
-        },
-        {
-          dia: "Quarta-feira",
-          horario: "17:00-18:00",
-          categoria: "Baby Gym",
-          modalidade: "ginastica"
-        }
-      ]
-    },
-    estatisticas: {
-      atletas_formados: 30,
-      anos_carreira: 5
-    },
-    observacoes: "Mãe de atleta do clube. Educadora de infância profissional. Trabalho voluntário.",
-    funcoes_adicionais: [
-      "Assistente de Baby Gym",
-      "Apoio em eventos infantis"
-    ],
-    salario: {
-      tipo: "Voluntário"
-    }
-  }
-];
+
 
 // Funções auxiliares para trabalhar com os dados dos treinadores
 

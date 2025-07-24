@@ -24,7 +24,6 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
   return (
     <main className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb Navigation */}
         <nav className="mb-8">
           <div className="flex items-center space-x-2 text-sm text-gray-500">
             <Link href="/" className="hover:text-blue-600 transition-colors">

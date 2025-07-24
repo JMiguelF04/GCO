@@ -67,60 +67,14 @@ export default async function NoticiaPage({ params }: NoticiaPageProps) {
                 {noticia.resumo}
               </p>
               
-              {/* Conteúdo expandido baseado no ID */}
-              {noticiaId === 1 && (
-                <div className="space-y-4 text-black text-black">
-                  <p>
-                    A nossa equipa de Andebol continua a demonstrar excelência no campo, conquistando mais uma vitória importante na Taça INATEL Andebol Lisboa 2025. Com um resultado de 27-18 contra o Liberdade FC, os nossos atletas mostraram determinação e técnica apurada.
-                  </p>
-                  <p>
-                    Esta vitória consolida a posição da equipa na competição e demonstra o trabalho árduo realizado pelos treinadores e atletas ao longo da época. O GCO continua a ser uma referência no andebol da região de Lisboa.
-                  </p>
-                  <p>
-                    Parabéns a todos os atletas, equipa técnica e adeptos que apoiaram a equipa nesta importante vitória!
-                  </p>
-                </div>
-              )}
-              
-              {noticiaId === 2 && (
+              {/* Conteúdo expandido do ficheiro de dados */}
+              {noticia.descricao && (
                 <div className="space-y-4 text-black">
-                  <p>
-                    No passado dia 24 de Maio, realizou-se a última jornada do Campeonato Distrital da 2ª Divisão de Clássicas da Associação de Xadrez de Lisboa. A nossa representação teve uma prestação notável ao longo de toda a competição.
-                  </p>
-                  <p>
-                    O xadrez no GCO tem vindo a crescer consistentemente, com jogadores de todas as idades a participar em competições distritais e regionais. Esta modalidade desenvolve o raciocínio estratégico e a capacidade de concentração dos nossos atletas.
-                  </p>
-                  <p>
-                    Continuamos a investir na formação dos nossos enxadristas, proporcionando-lhes as melhores condições para evoluírem na modalidade.
-                  </p>
-                </div>
-              )}
-              
-              {noticiaId === 3 && (
-                <div className="space-y-4 text-black">
-                  <p>
-                    Foi disponibilizada uma nova publicação na Pasta de Apoio da Plataforma da Patinagem Artística da Federação de Patinagem de Portugal, contendo o Regulamento Geral da Patinagem Artística.
-                  </p>
-                  <p>
-                    Este regulamento é essencial para todos os atletas, treinadores e dirigentes da modalidade, estabelecendo as normas e procedimentos que regem a patinagem artística nacional.
-                  </p>
-                  <p>
-                    A nossa secção de Patinagem Artística continua a formar atletas de excelência, seguindo sempre as melhores práticas e regulamentações da modalidade.
-                  </p>
-                </div>
-              )}
-              
-              {noticiaId === 4 && (
-                <div className="space-y-4 text-black">
-                  <p>
-                    O Ginásio Clube de Odivelas (GCO) apresenta com orgulho a sua Caderneta Oficial 2024-25, documento que reflete os 46 anos de história e dedicação ao desporto da nossa instituição.
-                  </p>
-                  <p>
-                    Esta caderneta contém informações importantes sobre todas as modalidades do clube, eventos realizados, conquistas alcançadas e projetos futuros. É um documento essencial para todos os sócios e simpatizantes do GCO.
-                  </p>
-                  <p>
-                    Continuamos comprometidos em proporcionar o melhor ambiente desportivo e formativo para todos os nossos atletas e comunidade.
-                  </p>
+                  {noticia.descricao.split('\n\n').map((paragrafo, index) => (
+                    <p key={index} className="whitespace-pre-line">
+                      {paragrafo}
+                    </p>
+                  ))}
                 </div>
               )}
             </div>
