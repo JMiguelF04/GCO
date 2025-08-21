@@ -52,7 +52,7 @@ export const eventos: Evento[] = [
     escaloes: ["Iniciados Masculinos", "Iniciados Femininos"],
     inscricoesAbertas: true,
     dataLimiteInscricao: "2025-08-31",
-    taxaInscricao: 150,
+    taxaInscricao: 160,
     coordenador: {
       nome: "Carlos Silva",
       telefone: "219 123 456",
@@ -82,7 +82,7 @@ export const eventos: Evento[] = [
     escaloes: ["Juvenis Masculinos", "Juvenis Femininos"],
     inscricoesAbertas: true,
     dataLimiteInscricao: "2025-09-01",
-    taxaInscricao: 175,
+    taxaInscricao: 185,
     coordenador: {
       nome: "Ana Ferreira",
       telefone: "219 123 457",
@@ -169,7 +169,7 @@ export const eventos: Evento[] = [
     escaloes: ["Elementares", "Avançados", "Competição"],
     inscricoesAbertas: true,
     dataLimiteInscricao: "2025-04-10",
-    taxaInscricao: 25,
+    taxaInscricao: 30,
     numeroMaximoParticipantes: 150,
     numeroAtualParticipantes: 87,
     coordenador: {
@@ -270,7 +270,7 @@ export const eventos: Evento[] = [
     endereco: "Rua dos Navegantes, 2750-642 Cascais",
     escaloes: ["Elementares", "Avançados"],
     inscricoesAbertas: false,
-    taxaInscricao: 40,
+    taxaInscricao: 45,
     coordenador: {
       nome: "Carla Mendes",
       telefone: "219 123 458",

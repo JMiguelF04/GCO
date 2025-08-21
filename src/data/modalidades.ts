@@ -1,4 +1,4 @@
-export interface Modalidade {
+Çexport interface Modalidade {
   nome: string;
   slug: string;
   icone: string;
@@ -49,21 +49,24 @@ export const modalidades: Modalidade[] = [
     categoria: "Desporto Coletivo",
     idadeMinima: 6,
     preco: {
-      mensalidade: 25,
-      inscricao: 50,
-      equipamento: 80
+      mensalidade: 30,
+      inscricao: 60,
+      equipamento: 90
     },
     horarios: [
-      { dia: "Segunda-feira", inicio: "18:00", fim: "19:30", nivel: "Iniciação", grupo: "Minis (6-8 anos)" },
-      { dia: "Quarta-feira", inicio: "18:00", fim: "19:30", nivel: "Iniciação", grupo: "Minis (6-8 anos)" },
-      { dia: "Terça-feira", inicio: "19:30", fim: "21:00", nivel: "Formação", grupo: "Infantis (9-11 anos)" },
-      { dia: "Quinta-feira", inicio: "19:30", fim: "21:00", nivel: "Formação", grupo: "Infantis (9-11 anos)" },
-      { dia: "Segunda-feira", inicio: "19:30", fim: "21:30", nivel: "Competição", grupo: "Iniciados (12-14 anos)" },
-      { dia: "Quarta-feira", inicio: "19:30", fim: "21:30", nivel: "Competição", grupo: "Iniciados (12-14 anos)" },
-      { dia: "Sexta-feira", inicio: "19:30", fim: "21:30", nivel: "Competição", grupo: "Iniciados (12-14 anos)" },
-      { dia: "Terça-feira", inicio: "20:00", fim: "22:00", nivel: "Alto Rendimento", grupo: "Juvenis/Juniores (15+ anos)" },
-      { dia: "Quinta-feira", inicio: "20:00", fim: "22:00", nivel: "Alto Rendimento", grupo: "Juvenis/Juniores (15+ anos)" },
-      { dia: "Sábado", inicio: "10:00", fim: "12:00", nivel: "Alto Rendimento", grupo: "Juvenis/Juniores (15+ anos)" }
+      { dia: "Segunda-feira", inicio: "17:30", fim: "19:00", nivel: "Iniciação", grupo: "Minis (6-8 anos)" },
+      { dia: "Quarta-feira", inicio: "17:30", fim: "19:00", nivel: "Iniciação", grupo: "Minis (6-8 anos)" },
+      { dia: "Terça-feira", inicio: "18:30", fim: "20:00", nivel: "Formação", grupo: "Infantis (9-11 anos)" },
+      { dia: "Quinta-feira", inicio: "18:30", fim: "20:00", nivel: "Formação", grupo: "Infantis (9-11 anos)" },
+      { dia: "Segunda-feira", inicio: "19:00", fim: "21:00", nivel: "Competição", grupo: "Iniciados (12-14 anos)" },
+      { dia: "Quarta-feira", inicio: "19:00", fim: "21:00", nivel: "Competição", grupo: "Iniciados (12-14 anos)" },
+      { dia: "Sexta-feira", inicio: "19:00", fim: "21:00", nivel: "Competição", grupo: "Iniciados (12-14 anos)" },
+      { dia: "Terça-feira", inicio: "19:30", fim: "21:30", nivel: "Competição", grupo: "Juvenis Femininos (15-17 anos)" },
+      { dia: "Quinta-feira", inicio: "19:30", fim: "21:30", nivel: "Competição", grupo: "Juvenis Femininos (15-17 anos)" },
+      { dia: "Sábado", inicio: "09:30", fim: "11:30", nivel: "Competição", grupo: "Juvenis Femininos (15-17 anos)" },
+      { dia: "Terça-feira", inicio: "20:00", fim: "22:00", nivel: "Alto Rendimento", grupo: "Juvenis/Juniores Masculinos (15+ anos)" },
+      { dia: "Quinta-feira", inicio: "20:00", fim: "22:00", nivel: "Alto Rendimento", grupo: "Juvenis/Juniores Masculinos (15+ anos)" },
+      { dia: "Sábado", inicio: "10:00", fim: "12:00", nivel: "Alto Rendimento", grupo: "Juvenis/Juniores Masculinos (15+ anos)" }
     ],
     instalacoes: ["Pavilhão Principal", "Campo exterior", "Balneários", "Ginásio de musculação"],
     equipamentoNecessario: ["Equipamento desportivo", "Sapatilhas adequadas", "Proteções (opcional)"],
@@ -117,20 +120,21 @@ export const modalidades: Modalidade[] = [
     categoria: "Desporto Individual",
     idadeMinima: 3,
     preco: {
-      mensalidade: 35,
-      inscricao: 60,
-      equipamento: 50
+      mensalidade: 40,
+      inscricao: 70,
+      equipamento: 60
     },
     horarios: [
-      { dia: "Segunda-feira", inicio: "17:00", fim: "18:00", nivel: "Baby Gym", grupo: "3-5 anos" },
-      { dia: "Quarta-feira", inicio: "17:00", fim: "18:00", nivel: "Baby Gym", grupo: "3-5 anos" },
+      { dia: "Segunda-feira", inicio: "16:30", fim: "17:30", nivel: "Baby Gym", grupo: "3-5 anos" },
+      { dia: "Quarta-feira", inicio: "16:30", fim: "17:30", nivel: "Baby Gym", grupo: "3-5 anos" },
+      { dia: "Sexta-feira", inicio: "16:30", fim: "17:30", nivel: "Baby Gym", grupo: "3-5 anos" },
       { dia: "Terça-feira", inicio: "17:30", fim: "19:00", nivel: "Iniciação", grupo: "6-8 anos" },
       { dia: "Quinta-feira", inicio: "17:30", fim: "19:00", nivel: "Iniciação", grupo: "6-8 anos" },
-      { dia: "Segunda-feira", inicio: "18:30", fim: "20:30", nivel: "Elementar", grupo: "9-12 anos" },
-      { dia: "Quarta-feira", inicio: "18:30", fim: "20:30", nivel: "Elementar", grupo: "9-12 anos" },
-      { dia: "Sexta-feira", inicio: "18:00", fim: "20:00", nivel: "Elementar", grupo: "9-12 anos" },
-      { dia: "Terça-feira", inicio: "19:30", fim: "21:30", nivel: "Avançado", grupo: "13+ anos" },
-      { dia: "Quinta-feira", inicio: "19:30", fim: "21:30", nivel: "Avançado", grupo: "13+ anos" },
+      { dia: "Segunda-feira", inicio: "18:00", fim: "20:00", nivel: "Elementar", grupo: "9-12 anos" },
+      { dia: "Quarta-feira", inicio: "18:00", fim: "20:00", nivel: "Elementar", grupo: "9-12 anos" },
+      { dia: "Sexta-feira", inicio: "17:30", fim: "19:30", nivel: "Elementar", grupo: "9-12 anos" },
+      { dia: "Terça-feira", inicio: "19:00", fim: "21:00", nivel: "Avançado", grupo: "13+ anos" },
+      { dia: "Quinta-feira", inicio: "19:00", fim: "21:00", nivel: "Avançado", grupo: "13+ anos" },
       { dia: "Sábado", inicio: "09:00", fim: "12:00", nivel: "Competição", grupo: "Selecionados" }
     ],
     instalacoes: ["Ginásio de Ginástica", "Tatamis", "Aparelhos oficiais", "Zona de aquecimento", "Balneários"],
@@ -185,18 +189,18 @@ export const modalidades: Modalidade[] = [
     categoria: "Desporto Individual",
     idadeMinima: 4,
     preco: {
-      mensalidade: 40,
-      inscricao: 70,
-      equipamento: 120
+      mensalidade: 45,
+      inscricao: 80,
+      equipamento: 140
     },
     horarios: [
-      { dia: "Terça-feira", inicio: "17:00", fim: "18:00", nivel: "Iniciação", grupo: "4-6 anos" },
-      { dia: "Quinta-feira", inicio: "17:00", fim: "18:00", nivel: "Iniciação", grupo: "4-6 anos" },
-      { dia: "Segunda-feira", inicio: "18:00", fim: "19:30", nivel: "Elementar", grupo: "7-10 anos" },
-      { dia: "Quarta-feira", inicio: "18:00", fim: "19:30", nivel: "Elementar", grupo: "7-10 anos" },
-      { dia: "Terça-feira", inicio: "19:00", fim: "21:00", nivel: "Avançado", grupo: "11+ anos" },
-      { dia: "Quinta-feira", inicio: "19:00", fim: "21:00", nivel: "Avançado", grupo: "11+ anos" },
-      { dia: "Sábado", inicio: "10:00", fim: "13:00", nivel: "Competição", grupo: "Todos os níveis" }
+      { dia: "Terça-feira", inicio: "16:45", fim: "17:45", nivel: "Iniciação", grupo: "4-6 anos" },
+      { dia: "Quinta-feira", inicio: "16:45", fim: "17:45", nivel: "Iniciação", grupo: "4-6 anos" },
+      { dia: "Segunda-feira", inicio: "17:45", fim: "19:15", nivel: "Elementar", grupo: "7-10 anos" },
+      { dia: "Quarta-feira", inicio: "17:45", fim: "19:15", nivel: "Elementar", grupo: "7-10 anos" },
+      { dia: "Terça-feira", inicio: "18:45", fim: "20:45", nivel: "Avançado", grupo: "11+ anos" },
+      { dia: "Quinta-feira", inicio: "18:45", fim: "20:45", nivel: "Avançado", grupo: "11+ anos" },
+      { dia: "Sábado", inicio: "09:30", fim: "12:30", nivel: "Competição", grupo: "Todos os níveis" }
     ],
     instalacoes: ["Pista de patinagem", "Zona de aquecimento", "Balneários", "Armazém de equipamentos"],
     equipamentoNecessario: ["Patins artísticos", "Equipamento de proteção", "Roupa adequada", "Capacete (iniciação)"],
@@ -250,15 +254,15 @@ export const modalidades: Modalidade[] = [
     categoria: "Desporto Mental",
     idadeMinima: 5,
     preco: {
-      mensalidade: 20,
-      inscricao: 30
+      mensalidade: 25,
+      inscricao: 35
     },
     horarios: [
-      { dia: "Quarta-feira", inicio: "17:30", fim: "18:30", nivel: "Iniciação", grupo: "5-8 anos" },
-      { dia: "Sábado", inicio: "10:00", fim: "11:00", nivel: "Iniciação", grupo: "5-8 anos" },
-      { dia: "Quarta-feira", inicio: "18:30", fim: "20:00", nivel: "Intermédio", grupo: "9-14 anos" },
-      { dia: "Sábado", inicio: "11:00", fim: "12:30", nivel: "Intermédio", grupo: "9-14 anos" },
-      { dia: "Quinta-feira", inicio: "19:00", fim: "21:00", nivel: "Avançado", grupo: "15+ anos" },
+      { dia: "Quarta-feira", inicio: "17:00", fim: "18:00", nivel: "Iniciação", grupo: "5-8 anos" },
+      { dia: "Sábado", inicio: "09:30", fim: "10:30", nivel: "Iniciação", grupo: "5-8 anos" },
+      { dia: "Quarta-feira", inicio: "18:00", fim: "19:30", nivel: "Intermédio", grupo: "9-14 anos" },
+      { dia: "Sábado", inicio: "10:30", fim: "12:00", nivel: "Intermédio", grupo: "9-14 anos" },
+      { dia: "Quinta-feira", inicio: "18:30", fim: "20:30", nivel: "Avançado", grupo: "15+ anos" },
       { dia: "Sábado", inicio: "14:00", fim: "17:00", nivel: "Competição", grupo: "Todos os níveis" }
     ],
     instalacoes: ["Sala de xadrez", "Tabuleiros e peças oficiais", "Relógios de xadrez", "Biblioteca de xadrez"],

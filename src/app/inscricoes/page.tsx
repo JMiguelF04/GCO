@@ -51,11 +51,12 @@ export default function InscricoesPage() {
                       <p className="text-gray-600 text-sm">{modalidade.descricao}</p>
                     </div>
                   </div>
-                  <button
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                  <Link
+                    href={`/modalidades/${modalidade.slug}`}
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors inline-block text-center"
                   >
-                    Inscrever
-                  </button>
+                    Ver Detalhes
+                  </Link>
                 </div>
                 
                 {!modalidade.ativo && (
@@ -80,28 +81,40 @@ export default function InscricoesPage() {
             <div className="bg-blue-50 p-4 rounded-md">
               <h3 className="text-lg font-semibold text-blue-800 mb-2">1. Pré-inscrição online</h3>
               <p className="text-gray-700">
-                Complete o formulário de pré-inscrição selecionando a modalidade e horário de interesse.
+                Complete o formulário de pré-inscrição selecionando a modalidade e horário de interesse. 
+                As inscrições estão abertas todo o ano, com início das atividades em setembro.
               </p>
             </div>
             
             <div className="bg-blue-50 p-4 rounded-md">
-              <h3 className="text-lg font-semibold text-blue-800 mb-2">2. Avaliação inicial</h3>
+              <h3 className="text-lg font-semibold text-blue-800 mb-2">2. Contacto e esclarecimentos</h3>
               <p className="text-gray-700">
-                Após a pré-inscrição, será agendada uma avaliação inicial para determinar o nível e grupo adequado.
+                Após a pré-inscrição, será contactado pelos nossos serviços para agendar uma reunião 
+                informativa e esclarecer todas as dúvidas sobre a modalidade escolhida.
               </p>
             </div>
             
             <div className="bg-blue-50 p-4 rounded-md">
-              <h3 className="text-lg font-semibold text-blue-800 mb-2">3. Confirmação e pagamento</h3>
+              <h3 className="text-lg font-semibold text-blue-800 mb-2">3. Avaliação inicial (modalidades competitivas)</h3>
               <p className="text-gray-700">
-                Após a avaliação, receberá os detalhes para confirmar a inscrição e efetuar o pagamento da taxa.
+                Para modalidades competitivas, será agendada uma avaliação inicial gratuita para 
+                determinar o nível e grupo mais adequado às capacidades do atleta.
               </p>
             </div>
             
             <div className="bg-blue-50 p-4 rounded-md">
-              <h3 className="text-lg font-semibold text-blue-800 mb-2">4. Início das atividades</h3>
+              <h3 className="text-lg font-semibold text-blue-800 mb-2">4. Confirmação e pagamento</h3>
               <p className="text-gray-700">
-                Após confirmação, poderá iniciar as atividades no horário escolhido.
+                Após a avaliação e aceitação da vaga, proceda ao pagamento da taxa de inscrição 
+                e primeira mensalidade para formalizar a entrada no clube.
+              </p>
+            </div>
+            
+            <div className="bg-blue-50 p-4 rounded-md">
+              <h3 className="text-lg font-semibold text-blue-800 mb-2">5. Início das atividades</h3>
+              <p className="text-gray-700">
+                Após confirmação, poderá iniciar as atividades no horário escolhido. 
+                Serão fornecidas todas as informações sobre equipamentos e regulamentos.
               </p>
             </div>
           </div>
@@ -113,7 +126,33 @@ export default function InscricoesPage() {
               <li>Comprovativo de morada</li>
               <li>Fotografia tipo passe</li>
               <li>Atestado médico (para competições)</li>
+              <li>Autorização dos encarregados de educação (menores)</li>
             </ul>
+          </div>
+
+          <div className="mt-8 bg-green-50 p-4 rounded-md">
+            <h3 className="text-lg font-semibold text-green-800 mb-3">Preços para a época 2024/2025:</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div>
+                <p className="font-medium text-green-700">Andebol:</p>
+                <p className="text-gray-700">Inscrição: 60€ | Mensalidade: 30€</p>
+              </div>
+              <div>
+                <p className="font-medium text-green-700">Ginástica:</p>
+                <p className="text-gray-700">Inscrição: 70€ | Mensalidade: 40€</p>
+              </div>
+              <div>
+                <p className="font-medium text-green-700">Patinagem Artística:</p>
+                <p className="text-gray-700">Inscrição: 80€ | Mensalidade: 45€</p>
+              </div>
+              <div>
+                <p className="font-medium text-green-700">Xadrez:</p>
+                <p className="text-gray-700">Inscrição: 35€ | Mensalidade: 25€</p>
+              </div>
+            </div>
+            <p className="text-xs text-gray-600 mt-2">
+              * Valores não incluem equipamentos. Desconto familiar de 10% a partir do 2º elemento.
+            </p>
           </div>
           
           <div className="mt-8 text-center">
