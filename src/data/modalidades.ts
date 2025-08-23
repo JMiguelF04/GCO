@@ -1,4 +1,4 @@
-Çexport interface Modalidade {
+export interface Modalidade {
   nome: string;
   slug: string;
   icone: string;
