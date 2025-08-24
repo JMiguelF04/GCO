@@ -5,7 +5,7 @@ INSERT INTO modalidades (id, nome, slug, icone, descricao, ativo, categoria, ida
 VALUES
 (1, 'Andebol', 'andebol', '/icones-modalidades/andebol.png', 'Equipas competitivas em várias categorias etárias.', 1, 'Desporto Coletivo', 6),
 (2, 'Ginástica', 'ginastica', '/icones-modalidades/ginastica.png', 'Atividade física que promove a flexibilidade, coordenação e disciplina.', 1, 'Individual', 4),
-(3, 'Patinagem Artística', '/icones-modalidades/patinagem.png', 'patinagem.png', 'Desporto artístico que combina técnica, dança e expressão corporal.', 1, 'Individual', 5),
+(3, 'Patinagem Artística', 'patinagem-artistica', '/icones-modalidades/patinagem.png', 'Desporto artístico que combina técnica, dança e expressão corporal.', 1, 'Individual', 5),
 (4, 'Xadrez', 'xadrez', '/icones-modalidades/xadrez.png', 'Jogo de estratégia que desenvolve raciocínio lógico e concentração.', 1, 'Intelectual', 6),
 (5, 'Hóquei em Patins', 'hoquei-em-patins', '/icones-modalidades/hoquei.png', 'Desporto coletivo rápido e competitivo praticado em patins.', 1, 'Coletiva', 6);
 
@@ -75,6 +75,23 @@ VALUES
 (3, 'Iniciação'), (3, 'Avançado'),
 (4, 'Todos os níveis'),
 (5, 'Iniciação'), (5, 'Avançado');
+
+--=============================================================================
+-- INSERIR EQUIPAMENTO
+--=============================================================================
+
+INSERT INTO equipamento (modalidade_id, nome) VALUES
+(1, 'Equipamento desportivo'),
+(1, 'Sapatilhas adequadas'),
+(1, 'Proteções (opcional)'),
+(2, 'Fato de ginástica'),
+(2, 'Sapatilhas de ginástica'),
+(2, 'Proteções para pulsos (opcional)'),
+(3, 'Patins artísticos'),
+(3, 'Equipamento de proteção'),
+(3, 'Roupa adequada'),
+(3, 'Capacete (iniciação)'),
+(4, 'Material fornecido pelo clube');
 
 -- ========================================
 -- INSERIR COMPETIÇÕES

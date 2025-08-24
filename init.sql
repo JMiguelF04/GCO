@@ -44,6 +44,13 @@ CREATE TABLE niveis (
   FOREIGN KEY (modalidade_id) REFERENCES modalidades(id) ON DELETE CASCADE
 );
 
+CREATE TABLE equipamento (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  modalidade_id INT,
+  nome TEXT,
+  FOREIGN KEY (modalidade_id) REFERENCES modalidades(id) ON DELETE CASCADE
+);
+
 CREATE TABLE competicoes (
   id INT AUTO_INCREMENT PRIMARY KEY,
   modalidade_id INT,

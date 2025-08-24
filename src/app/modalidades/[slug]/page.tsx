@@ -1,25 +1,82 @@
-import { getModalidadeBySlug, Modalidade } from "@/data/modalidades";
-import { getTreinadoresByModalidade } from "@/data/treinadores";
+import pool from "@/lib/mysql";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
 interface ModalidadePageProps {
-  params: Promise<{
-    slug: string;
-  }>;
+  params: { slug: string };
+}
+
+async function fetchModalidadeBySlug(slug: string) {
+  const [modalidades] = await pool.query<any[]>(
+    "SELECT * FROM modalidades WHERE slug = ? LIMIT 1",
+    [slug]
+  );
+  const modalidade = modalidades[0];
+  if (!modalidade) return null;
+
+  const [detalhes] = await pool.query<any[]>(
+    "SELECT * FROM detalhes_modalidade WHERE modalidade_id = ? LIMIT 1",
+    [modalidade.id]
+  );
+  modalidade.detalhes = detalhes[0] || {};
+
+  const [niveis] = await pool.query<any[]>(
+    "SELECT descricao FROM niveis WHERE modalidade_id = ?",
+    [modalidade.id]
+  );
+  modalidade.niveis = niveis.map((n) => n.descricao);
+
+  const [equipamento] = await pool.query<any[]>(
+    "SELECT nome FROM equipamento WHERE modalidade_id = ?",
+    [modalidade.id]
+  );
+  modalidade.equipamento = equipamento.map((e) => e.nome);
+
+  const [competicoes] = await pool.query<any[]>(
+    "SELECT nome FROM competicoes WHERE modalidade_id = ?",
+    [modalidade.id]
+  );
+  modalidade.competicoes = competicoes.map((c) => c.nome);
+
+  const [horarios] = await pool.query<any[]>(
+    "SELECT dia, inicio, fim, nivel, grupo FROM horarios WHERE modalidade_id = ?",
+    [modalidade.id]
+  );
+  modalidade.horarios = horarios;
+
+  // 6. Buscar equipa técnica (treinadores)
+  const [treinadores] = await pool.query<any[]>(
+    "SELECT * FROM treinadores WHERE modalidade_id = ?",
+    [modalidade.id]
+  );
+  modalidade.treinadores = treinadores;
+
+  const [precos] = await pool.query<any[]>(
+    "SELECT mensalidade, inscricao, equipamento FROM preco WHERE modalidade_id = ? LIMIT 1",
+    [modalidade.id]
+  );
+  modalidade.preco = precos[0] || {};
+
+  const [contactos] = await pool.query<any[]>(
+    "SELECT responsavel, telefone, email FROM contacto_modalidade WHERE modalidade_id = ? LIMIT 1",
+    [modalidade.id]
+  );
+  modalidade.contacto = contactos[0] || {};
+
+  return modalidade;
 }
 
 export default async function ModalidadePage({ params }: ModalidadePageProps) {
-  const { slug } = await params;
-  const modalidade = getModalidadeBySlug(slug);
+  const { slug } = params;
+  const modalidade = await fetchModalidadeBySlug(slug);
 
   if (!modalidade) {
     notFound();
   }
 
   // Obter treinadores reais da modalidade
-  const treinadoresDaModalidade = getTreinadoresByModalidade(slug);
+  const treinadoresDaModalidade = modalidade.treinadores;
 
   return (
     <main className="min-h-screen bg-gray-50 py-12">
@@ -212,7 +269,7 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                 <div className="bg-white rounded-xl shadow-md p-6">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">Equipamento Necessário</h2>
                   <div className="space-y-2">
-                    {modalidade.equipamentoNecessario.map((item, index) => (
+                    {modalidade.equipamento.map((item, index) => (
                       <div key={index} className="flex items-center">
                         <span className="text-blue-500 mr-2">•</span>
                         <span className="text-gray-700 text-sm">{item}</span>
