@@ -1,5 +1,4 @@
-import { modalidades } from "@/data/modalidades";
-import { getTreinadorById } from "@/data/treinadores";
+import { fetchModalidadeBySlug } from "@/data/modalidades-db";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,9 +7,24 @@ interface TreinadorPageProps {
   params: { slug: string; id: string };
 }
 
-export default function TreinadorDetalhePage({ params }: TreinadorPageProps) {
-  const modalidade = modalidades.find((m) => m.slug === params.slug);
-  const treinador = getTreinadorById(Number(params.id));
+function calcularIdade(dataNascimento: string | Date) {
+  const nascimento = new Date(dataNascimento);
+  const hoje = new Date();
+  let idade = hoje.getFullYear() - nascimento.getFullYear();
+  const m = hoje.getMonth() - nascimento.getMonth();
+  if (m < 0 || (m === 0 && hoje.getDate() < nascimento.getDate())) {
+    idade--;
+  }
+  return idade;
+}
+
+export default async function TreinadorDetalhePage({ params }: TreinadorPageProps) {
+  const modalidade = await fetchModalidadeBySlug(params.slug);
+  const treinadoresDaModalidade = modalidade.treinadores || [];
+
+  const treinador = treinadoresDaModalidade.find(
+    (t) => String(t.id) === params.id
+  );
 
   if (!modalidade || !treinador) {
     notFound();
@@ -29,7 +43,7 @@ export default function TreinadorDetalhePage({ params }: TreinadorPageProps) {
                   {treinador.foto ? (
                     <Image
                       src={treinador.foto}
-                      alt={`Foto de ${treinador.nomeCompleto}`}
+                      alt={`Foto de ${treinador.nome}`}
                       fill
                       className="object-cover"
                     />
@@ -43,7 +57,7 @@ export default function TreinadorDetalhePage({ params }: TreinadorPageProps) {
 
               {/* Informações Principais */}
               <div className="flex-1 text-center lg:text-left">
-                <h1 className="text-3xl font-bold mb-2">{treinador.nomeCompleto}</h1>
+                <h1 className="text-3xl font-bold mb-2">{treinador.nome}</h1>
                 <p className="text-xl text-blue-200 mb-4">{treinador.qualificacoes.nivel_treinador}</p>
                 
                 <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
@@ -54,7 +68,7 @@ export default function TreinadorDetalhePage({ params }: TreinadorPageProps) {
                     {treinador.anos_no_clube} anos no GCO
                   </span>
                   <span className="bg-white/20 px-3 py-1 rounded-full text-sm">
-                    {treinador.idade} anos
+                    {calcularIdade(treinador.data_de_nascimento)} anos
                   </span>
                 </div>
               </div>
@@ -74,19 +88,19 @@ export default function TreinadorDetalhePage({ params }: TreinadorPageProps) {
                   </h2>
                   <div className="space-y-3 text-gray-700">
                     <div>
-                      <span className="font-medium">Data de Nascimento:</span> {new Date(treinador.dataNascimento).toLocaleDateString('pt-PT')}
+                      <span className="font-medium">Data de Nascimento:</span> {new Date(treinador.data_de_nascimento).toLocaleDateString('pt-PT')}
                     </div>
                     <div>
-                      <span className="font-medium">Modalidades:</span> {treinador.modalidades.join(', ')}
+                      <span className="font-medium">Modalidade:</span> {modalidade.nome}
                     </div>
                     <div>
-                      <span className="font-medium">Data de Início no GCO:</span> {new Date(treinador.dataInicio).toLocaleDateString('pt-PT')}
+                      <span className="font-medium">Data de Início no GCO:</span> {new Date(treinador.data_de_inicio_gco).toLocaleDateString('pt-PT')}
                     </div>
                     <div>
-                      <span className="font-medium">Contacto:</span> {treinador.contacto.telefone}
+                      <span className="font-medium">Contacto:</span> {treinador.contacto}
                     </div>
                     <div>
-                      <span className="font-medium">Email:</span> {treinador.contacto.email}
+                      <span className="font-medium">Email:</span> {treinador.email}
                     </div>
                   </div>
                 </div>
@@ -196,8 +210,10 @@ export default function TreinadorDetalhePage({ params }: TreinadorPageProps) {
                     <div className="mb-4">
                       <h3 className="font-medium text-gray-700 mb-2">Clubes Anteriores:</h3>
                       <ul className="space-y-1">
-                        {treinador.experiencia.clubes_anteriores.map((clube, index) => (
-                          <li key={index} className="text-gray-600">• {clube}</li>
+                        {treinador.experiencia.clubes_anteriores.map((clube: { nome: string; periodo: string }, index: number) => (
+                          <li key={index} className="text-gray-600">
+                            • {clube.nome} <span className="text-xs text-gray-400">({clube.periodo})</span>
+                          </li>
                         ))}
                       </ul>
                     </div>
@@ -235,15 +251,15 @@ export default function TreinadorDetalhePage({ params }: TreinadorPageProps) {
               </div>
             )}
 
-            {/* Funções Adicionais */}
-            {treinador.funcoes_adicionais.length > 0 && (
+           {/* Funções Adicionais */}
+            {treinador.funcoes.length > 0 && (
               <div className="mt-8 bg-blue-50 rounded-lg p-6">
                 <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
                   <span className="mr-2">⭐</span>
                   Funções Adicionais no Clube
                 </h2>
                 <div className="flex flex-wrap gap-3">
-                  {treinador.funcoes_adicionais.map((funcao, index) => (
+                  {treinador.funcoes.map((funcao, index) => (
                     <span key={index} className="px-4 py-2 bg-blue-100 text-blue-800 font-medium rounded-lg">
                       {funcao}
                     </span>

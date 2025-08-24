@@ -1,5 +1,4 @@
-import { modalidades } from "@/data/modalidades";
-import { getTreinadoresByModalidade } from "@/data/treinadores";
+import { fetchModalidadeBySlug } from "@/data/modalidades-db";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,17 +7,13 @@ interface TreinadoresPageProps {
   params: { slug: string };
 }
 
-export default function TreinadoresPage({ params }: TreinadoresPageProps) {
-  const modalidade = modalidades.find(m => m.slug === params.slug);
+export default async function TreinadoresPage({ params }: TreinadoresPageProps) {
+  const modalidade = await fetchModalidadeBySlug(params.slug);
+  const treinadoresDaModalidade = modalidade.treinadores || [];
 
   if (!modalidade) {
     notFound();
   }
-
-  // Obter treinadores reais da modalidade e ordenar por anos de experiência
-  const treinadoresDaModalidade = getTreinadoresByModalidade(params.slug).sort((a, b) => 
-    b.experiencia.anos_experiencia - a.experiencia.anos_experiencia
-  );
 
   return (
     <main className="min-h-screen bg-gray-50 py-12 relative">
@@ -42,7 +37,7 @@ export default function TreinadoresPage({ params }: TreinadoresPageProps) {
                   {treinador.foto ? (
                     <Image
                       src={treinador.foto}
-                      alt={`Foto de ${treinador.nomeCompleto}`}
+                      alt={`Foto de ${treinador.nome}`}
                       fill
                       className="object-cover"
                     />
@@ -56,7 +51,7 @@ export default function TreinadoresPage({ params }: TreinadoresPageProps) {
                 {/* Informações do Treinador */}
                 <div className="p-6">
                   <h2 className="text-xl font-bold text-gray-900 mb-2">
-                    {treinador.nomeCompleto}
+                    {treinador.nome}
                   </h2>
                   
                   <p className="text-blue-600 font-medium mb-3">
