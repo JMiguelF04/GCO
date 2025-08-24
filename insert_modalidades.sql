@@ -128,3 +128,8 @@ VALUES
 (3, 'Ana Ferreira', '914567890', 'ana.ferreira@gco.pt'),
 (4, 'Pedro Santos', '915678901', 'pedro.santos@gco.pt'),
 (5, 'Rui Almeida', '916789012', 'rui.almeida@gco.pt');
+
+
+
+
+

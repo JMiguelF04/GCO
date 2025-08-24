@@ -50,7 +50,9 @@ async function fetchModalidadeBySlug(slug: string) {
     "SELECT * FROM treinadores WHERE modalidade_id = ?",
     [modalidade.id]
   );
-  modalidade.treinadores = treinadores;
+  modalidade.treinadores = await Promise.all(
+    treinadores.map(async (treinador) => await fetchTreinadorCompleto(treinador))
+  );
 
   const [precos] = await pool.query<any[]>(
     "SELECT mensalidade, inscricao, equipamento FROM preco WHERE modalidade_id = ? LIMIT 1",
@@ -67,16 +69,120 @@ async function fetchModalidadeBySlug(slug: string) {
   return modalidade;
 }
 
+async function fetchTreinadorCompleto(treinador: any) {
+
+  const [categorias] = await pool.query<any[]>(
+    `SELECT c.nome FROM categorias c
+     JOIN treinador_categoria tc ON tc.categoria_id = c.id
+     WHERE tc.treinador_id = ?`,
+    [treinador.id]
+  );
+  treinador.categorias = categorias.map((c) => c.nome);
+
+  const [qualificacoes] = await pool.query<any[]>(
+    "SELECT * FROM qualificacoes WHERE treinador_id = ? LIMIT 1",
+    [treinador.id]
+  );
+  const qual = qualificacoes[0] || {};
+  treinador.qualificacoes = {
+    nivel_treinador: qual.nivel_treinador || "",
+    formacao_academica: qual.formacao_academica || "",
+    certificacoes: [],
+    cursos_especializacao: [],
+    licencas: [],
+  };
+
+  if (qual.id) {
+    const [certificacoes] = await pool.query<any[]>(
+      "SELECT nome_certificacao FROM certificacoes WHERE qualificacao_id = ?",
+      [qual.id]
+    );
+    treinador.qualificacoes.certificacoes = certificacoes.map((c) => c.nome_certificacao);
+
+    // Cursos de especialização
+    const [cursos] = await pool.query<any[]>(
+      "SELECT nome_curso FROM cursos_especializacao WHERE qualificacao_id = ?",
+      [qual.id]
+    );
+    treinador.qualificacoes.cursos_especializacao = cursos.map((c) => c.nome_curso);
+
+    // Licenças
+    const [licencas] = await pool.query<any[]>(
+      "SELECT nome_licenca, validade FROM licencas WHERE qualificacao_id = ?",
+      [qual.id]
+    );
+    treinador.qualificacoes.licencas = licencas.map((l) => ({
+      nome: l.nome_licenca,
+      validade: l.validade,
+    }));
+  }
+
+  // Experiência
+  const [experiencias] = await pool.query<any[]>(
+    "SELECT * FROM experiencia WHERE treinador_id = ? LIMIT 1",
+    [treinador.id]
+  );
+  const exp = experiencias[0] || {};
+  treinador.experiencia = {
+    anos_experiencia: exp.anos_experiencia || 0,
+    clubes_anteriores: [],
+    conquistas_como_treinador: [],
+    especialidades: [],
+  };
+
+  if (exp.id) {
+    // Clubes anteriores
+    const [clubes] = await pool.query<any[]>(
+      "SELECT nome_clube, periodo FROM clubes_anteriores WHERE experiencia_id = ?",
+      [exp.id]
+    );
+    treinador.experiencia.clubes_anteriores = clubes.map((c) => ({
+      nome: c.nome_clube,
+      periodo: c.periodo,
+    }));
+
+    // Conquistas
+    const [conquistas] = await pool.query<any[]>(
+      "SELECT descricao FROM conquistas WHERE experiencia_id = ?",
+      [exp.id]
+    );
+    treinador.experiencia.conquistas_como_treinador = conquistas.map((c) => c.descricao);
+
+    // Especialidades
+    const [especialidades] = await pool.query<any[]>(
+      "SELECT descricao FROM especialidades WHERE experiencia_id = ?",
+      [exp.id]
+    );
+    treinador.experiencia.especialidades = especialidades.map((e) => e.descricao);
+  }
+
+  // Estatísticas
+  const [estatisticas] = await pool.query<any[]>(
+    "SELECT atletas_formados, titulos_conquistados, anos_carreira FROM estatisticas WHERE treinador_id = ? LIMIT 1",
+    [treinador.id]
+  );
+  treinador.estatisticas = estatisticas[0] || {};
+
+  // Funções
+  const [funcoes] = await pool.query<any[]>(
+    `SELECT f.descricao FROM funcoes f
+     JOIN treinador_funcao tf ON tf.funcao_id = f.id
+     WHERE tf.treinador_id = ?`,
+    [treinador.id]
+  );
+  treinador.funcoes = funcoes.map((f) => f.descricao);
+
+  return treinador;
+}
+
 export default async function ModalidadePage({ params }: ModalidadePageProps) {
   const { slug } = params;
   const modalidade = await fetchModalidadeBySlug(slug);
+  const treinadoresDaModalidade = modalidade.treinadores || [];
 
   if (!modalidade) {
     notFound();
   }
-
-  // Obter treinadores reais da modalidade
-  const treinadoresDaModalidade = modalidade.treinadores;
 
   return (
     <main className="min-h-screen bg-gray-50 py-12">
@@ -192,7 +298,7 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                 <div className="space-y-2">
                   {treinadoresDaModalidade.slice(0, 3).map((treinador) => (
                     <div key={treinador.id} className="text-sm">
-                      <p className="font-medium text-white bg-blue-700 font-semibold text-center rounded-xl">{treinador.nomeCompleto}</p>
+                      <p className="font-medium text-white bg-blue-700 font-semibold text-center rounded-xl">{treinador.nome}</p>
                       <p className="text-gray-600 text-center">{treinador.qualificacoes.nivel_treinador}</p>
                       <p className="text-xs text-gray-500 text-center">{treinador.experiencia.anos_experiencia} anos de experiência</p>
                     </div>
@@ -345,7 +451,7 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                                 {treinador.foto ? (
                                   <Image
                                     src={treinador.foto}
-                                    alt={`Foto de ${treinador.nomeCompleto}`}
+                                    alt={`Foto de ${treinador.nome}`}
                                     fill
                                     className="object-cover"
                                   />
@@ -360,7 +466,7 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                             {/* Informações do Treinador */}
                             <div className="flex-1">
                               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-2">
-                                <h3 className="font-bold text-gray-900 text-lg">{treinador.nomeCompleto}</h3>
+                                <h3 className="font-bold text-gray-900 text-lg">{treinador.nome}</h3>
                                 <div className="flex gap-2 mt-2 lg:mt-0">
                                   <span className="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">
                                     {treinador.experiencia.anos_experiencia} anos
