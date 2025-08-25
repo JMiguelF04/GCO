@@ -46,7 +46,7 @@ const produtos = [
   },
 ];
 
-export default function ProdutoPage({ params }: ProdutoPageProps) {
+export default async function ProdutoPage({ params }: ProdutoPageProps) {
   const produto = produtos.find(p => p.slug === params.slug);
 
   if (!produto) return notFound();
