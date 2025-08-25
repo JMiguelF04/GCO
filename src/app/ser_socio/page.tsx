@@ -81,7 +81,7 @@ export default function SerSocioPage() {
               </p>
               <p className="mt-2">
                 Exemplo de texto 
-                <a href="mailto:transferencias@gcodivelas.pt" className="text-blue-600 hover:underline ml-1">123456789</a>.
+                <a href="mailto:geral@gcodivelas.pt" className="text-blue-600 hover:underline ml-1">123456789</a>.
               </p>
 
               <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
@@ -107,7 +107,7 @@ export default function SerSocioPage() {
               </p>
               <p className="mt-2">
                 Para maior comodidade, poderá realizar os pagamentos por transferência bancária, indicando no descritivo o número de sócio e o NIF. O comprovativo da operação deve ser enviado para o email:
-                <a href="mailto:transferencias@gcodivelas.pt" className="text-blue-600 hover:underline ml-1">transferencias@gcodivelas.pt</a>.
+                <a href="mailto:geral@gcodivelas.pt" className="text-blue-600 hover:underline ml-1">geral@gcodivelas.pt</a>.
               </p>
 
               <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
@@ -123,7 +123,7 @@ export default function SerSocioPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-4">Contactos</h3>
               <p className="text-sm text-gray-700 mb-2">
                 <strong>Email:</strong>{' '}
-                <a href="mailto:info@gcodivelas.pt" className="text-blue-600 hover:underline">gco@gcodivelas.pt</a>
+                <a href="mailto:geral@gcodivelas.pt" className="text-blue-600 hover:underline">geral@gcodivelas.pt</a>
               </p>
               <p className="text-sm text-gray-700 mb-2">
                 <strong>Telefone:</strong> +351 21 932 6546

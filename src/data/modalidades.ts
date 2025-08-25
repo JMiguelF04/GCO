@@ -33,9 +33,9 @@ export interface Modalidade {
     progressao: string;
   };
   contacto: {
-    responsavel: string;
-    telefone?: string;
-    email?: string;
+  responsavel: string;
+  telefone?: string;
+  email?: string;
   };
 }
 
@@ -108,7 +108,7 @@ export const modalidades: Modalidade[] = [
     contacto: {
       responsavel: "Carlos Silva",
       telefone: "219 123 456",
-      email: "andebol@gcodivelas.pt"
+  email: "geral@gcodivelas.pt"
     }
   },
   {
@@ -177,7 +177,7 @@ export const modalidades: Modalidade[] = [
     contacto: {
       responsavel: "Sofia Rodrigues",
       telefone: "219 123 457",
-      email: "ginastica@gcodivelas.pt"
+  email: "geral@gcodivelas.pt"
     }
   },
   {
@@ -242,7 +242,7 @@ export const modalidades: Modalidade[] = [
     contacto: {
       responsavel: "Carla Mendes",
       telefone: "219 123 458",
-      email: "patinagem@gcodivelas.pt"
+  email: "geral@gcodivelas.pt"
     }
   },
   {
@@ -305,7 +305,7 @@ export const modalidades: Modalidade[] = [
     contacto: {
       responsavel: "José Martins",
       telefone: "219 123 459",
-      email: "xadrez@gcodivelas.pt"
+  email: "geral@gcodivelas.pt"
     }
   },
   {
@@ -352,7 +352,7 @@ export const modalidades: Modalidade[] = [
     },
     contacto: {
       responsavel: "Direção do Clube",
-      email: "info@gcodivelas.pt"
+  email: "geral@gcodivelas.pt"
     }
   }
 ];

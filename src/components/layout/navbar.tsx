@@ -137,19 +137,11 @@ const Navbar = () => {
             </div>
 
             <Link
-              href="/loja"
-              className="text-white hover:text-yellow-200 font-medium transition-colors"
-            >
-              Loja Oficial
-            </Link>
-
-            <Link
               href="/horarios"
               className="text-white hover:text-yellow-200 font-medium transition-colors"
             >
               Horários
             </Link>
-
             <Link
               href="/noticias"
               className="text-white hover:text-yellow-200 font-medium transition-colors"

@@ -77,7 +77,7 @@ export default function ContactosPage() {
                 </div>
                 <div className="ml-4">
                   <p className="text-lg font-medium text-gray-900">Telefone</p>
-                  <p className="text-gray-600">+351 219 123 456</p>
+                  <p className="text-gray-600">+351 219 326 546</p>
                 </div>
               </div>
               
@@ -90,7 +90,7 @@ export default function ContactosPage() {
                 <div className="ml-4">
                   <p className="text-lg font-medium text-gray-900">Email</p>
                   <p className="text-blue-600 hover:underline">
-                    <a href="mailto:info@gcodivelas.pt">info@gcodivelas.pt</a>
+                    <a href="mailto:geral@gcodivelas.pt">geral@gcodivelas.pt</a>
                   </p>
                 </div>
               </div>
@@ -103,7 +103,7 @@ export default function ContactosPage() {
                 </div>
                 <div className="ml-4">
                   <p className="text-lg font-medium text-gray-900">Horário da Secretaria</p>
-                  <p className="text-gray-600">Segunda a Sexta: 10h00 - 12h30 e 14h30 - 19h00<br />Sábados: 10h00 - 13h00</p>
+                  <p className="text-gray-600">Segunda a Sexta: 18h00 - 20h00</p>
                 </div>
               </div>
             </div>
@@ -164,7 +164,6 @@ export default function ContactosPage() {
         <div className="mt-8 bg-white rounded-lg shadow-md p-6">
           <h2 className="text-2xl font-bold text-blue-800 mb-4">Como Chegar</h2>
           <div className="h-96 bg-gray-200 rounded-md">
-            {/* Aqui você colocaria um componente de mapa como Google Maps */}
             <div className="w-full h-full flex items-center justify-center text-gray-500">
               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2329.861307822613!2d-9.179967135177689!3d38.78682447297313!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1932a58f6355ed%3A0x256d7d4619ae726e!2sGin%C3%A1sio%20Clube%20Odivelas!5e0!3m2!1spt-PT!2spt!4v1751638837262!5m2!1spt-PT!2spt"
                 width="1170"

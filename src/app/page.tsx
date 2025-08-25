@@ -26,7 +26,7 @@ export default function Home() {
               Inscreva-se Agora
             </Link>
             <Link
-              href="mailto:tryouts@gcodivelas.pt"
+              href="mailto:geral@gcodivelas.pt"
               className="border-2 border-blue-800 text-blue-800 px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-800 hover:text-white transition-colors"
             >
               Contactar Tryouts

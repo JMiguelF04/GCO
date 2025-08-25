@@ -57,7 +57,7 @@ export default function NotFound() {
           </div>
         </div>
 
-        {/* Links úteis */}
+        {/* Links útis */}
         <div className="mt-12">
           <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border-t border-gray-200/50">
             <p className="text-sm text-gray-600 mb-4 font-medium">Pode também visitar:</p>

@@ -10,7 +10,7 @@ export default function ModalidadesSection() {
             As Nossas Modalidades
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Oferecemos uma ampla variedade de modalidades desportivas para todas as idades e níveis de experiência
+            Oferecemos uma variedade de modalidades desportivas para todas as idades e níveis de experiência
           </p>
         </div>
         

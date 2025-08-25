@@ -19,7 +19,7 @@ export default function HeroSection() {
           </p>
           <p className="text-lg mb-8 max-w-3xl mx-auto text-blue-50">
             Com sede em Odivelas, o clube dedica-se a promover a prática de diversas modalidades desportivas, 
-            como a Ginástica, o Andebol, o Hóquei Patins, a Patinagem Artística, Xadrez e outras.
+            como a Ginástica, o Andebol, o Hóquei Patins, a Patinagem Artística e Xadrez.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

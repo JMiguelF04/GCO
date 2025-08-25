@@ -20,7 +20,7 @@ export default function ModalidadeCard({ modalidade }: ModalidadeCardProps) {
     >
       {!ativo && (
         <div className="absolute top-4 right-4 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">
-          SUSPENSO
+          ATUALMENTE SEM ATIVIDADE
         </div>
       )}
       <div className={`mb-4 flex items-center justify-center ${!ativo ? 'filter grayscale' : ''}`}
@@ -62,7 +62,7 @@ export default function ModalidadeCard({ modalidade }: ModalidadeCardProps) {
         
         {!ativo && (
           <span className="text-gray-500 font-semibold text-sm">
-            Modalidade suspensa
+            Modalidade sem atividade
           </span>
         )}
       </div>
