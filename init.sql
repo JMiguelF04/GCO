@@ -80,8 +80,9 @@ CREATE TABLE contacto_modalidade (
 CREATE TABLE IF NOT EXISTS preco (
     id INT AUTO_INCREMENT PRIMARY KEY,
     modalidade_id INT NOT NULL,
-    tipo VARCHAR(50) NOT NULL,   -- 'Mensalidade', 'Inscrição', 'Equipamento'
-    valor DECIMAL(10,2) NOT NULL,
+    mensalidade DECIMAL(10,2) NOT NULL,   -- 'Mensalidade', 'Inscrição', 'Equipamento'
+    inscricao DECIMAL(10,2) NOT NULL,
+    equipamento DECIMAL(10,2) 
     FOREIGN KEY (modalidade_id) REFERENCES modalidades(id) ON DELETE CASCADE
 );
 
