@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { produtos } from "@/data/produtos"
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,44 +7,6 @@ interface ProdutoPageProps {
   params: { slug: string };
 }
 
-const produtos = [
-  {
-    nome: "T-shirt Oficial GCO",
-    preco: "15,00 €",
-    imagem: "/produtos/tshirt-exemplo.jpg",
-    slug: "t-shirt-oficial-gco",
-  },
-  {
-    nome: "Casaco Corta-Vento GCO",
-    preco: "30,00 €",
-    imagem: "/produtos/casaco-exemplo.jpg",
-    slug: "casaco-corta-vento-gco",
-  },
-  {
-    nome: "Kimono de Karaté",
-    preco: "40,00 €",
-    imagem: "/produtos/kimono-exemplo.jpg",
-    slug: "kimono-gco",
-  },
-  {
-    nome: "Mochila Desportiva GCO",
-    preco: "25,00 €",
-    imagem: "/produtos/mochila.jpg",
-    slug: "mochila-oficial-gco",
-  },
-  {
-    nome: "Pinos de Desporto",
-    preco: "3,00 € (jóia) + 5,00 €/mês",
-    imagem: "/produtos/pinos.jpg",
-    slug: "pinos",
-  },
-  {
-    nome: "Patins",
-    preco: "10,00 €",
-    imagem: "/produtos/patins.jpg",
-    slug: "pinos",
-  },
-];
 
 export default async function ProdutoPage({ params }: ProdutoPageProps) {
   const produto = produtos.find((p) => p.slug === params.slug);
@@ -84,7 +47,7 @@ export default async function ProdutoPage({ params }: ProdutoPageProps) {
   );
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return produtos.map((produto) => ({
     slug: produto.slug,
   }));
