@@ -8,7 +8,7 @@ interface AtletaPageProps {
   params: { slug: string; id: string };
 }
 
-export default function AtletaDetalhePage({ params }: { params: { slug: string; id: string } }) {
+export default function AtletaDetalhePage({ params }: AtletaPageProps) {
   const modalidade = modalidades.find((m) => m.slug === params.slug);
   const atleta = getAtletaById(Number(params.id));
 
