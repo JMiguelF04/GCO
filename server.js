@@ -1,4 +1,4 @@
-const { createServer } = require('http');
+const { createServer } = require('https');
 const next = require('next');
 
 const port = process.env.PORT || 3000; 
@@ -9,6 +9,6 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   createServer((req, res) => handle(req, res)).listen(port, err => {
     if (err) throw err;
-    console.log(`> Ready on http://localhost:${port}`);
+    console.log(`> Ready on https://gcodivelas.eu:${port}`);
   });
 });
