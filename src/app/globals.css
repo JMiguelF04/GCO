@@ -1,4 +1,6 @@
-@import "tailwindcss/postcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --primary-blue: #1e40af;
