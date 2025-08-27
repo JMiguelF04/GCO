@@ -49,3 +49,4 @@ CREATE TABLE IF NOT EXISTS contacto (
     data TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+mysql -u root -p
