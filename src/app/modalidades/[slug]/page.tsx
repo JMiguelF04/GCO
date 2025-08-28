@@ -251,25 +251,6 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
 
 
 
-            {/* Botões de Ação */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-              <Link
-                href={`/modalidades/${modalidade.slug}/atletas`}
-                className="bg-white border-2 border-blue-600 text-blue-600 py-4 px-6 rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300 text-center font-semibold shadow-md hover:shadow-lg flex items-center justify-center"
-              >
-                <span className="mr-2">👥</span>
-                Ver Atletas da Modalidade
-              </Link>
-              
-              <Link
-                href={`/modalidades/${modalidade.slug}/treinadores`}
-                className="bg-white border-2 border-green-600 text-green-600 py-4 px-6 rounded-xl hover:bg-green-600 hover:text-white transition-all duration-300 text-center font-semibold shadow-md hover:shadow-lg flex items-center justify-center"
-              >
-                <span className="mr-2">🎯</span>
-                Ver Equipa Técnica
-              </Link>
-            </div>
-
             {/* Contacto e Inscrição */}
             <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg p-8 mt-8 text-white">
               <div className="text-center mb-6">
