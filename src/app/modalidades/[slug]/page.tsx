@@ -120,38 +120,6 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
 
               <div className="bg-white rounded-xl shadow-md p-6">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
-                    <span className="text-2xl">👥</span>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900">Treinadores</h3>
-                    <p className="text-sm text-gray-600">{treinadoresDaModalidade.length} profissiona{treinadoresDaModalidade.length == 1 ? 'l' : ''}{treinadoresDaModalidade.length !== 1 ? 'is' : ''}</p>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  {treinadoresDaModalidade.slice(0, 3).map((treinador) => (
-                    <div key={treinador.id} className="text-sm">
-                      <p className="font-medium text-white bg-blue-700 font-semibold text-center rounded-xl">{treinador.nome}</p>
-                      <p className="text-gray-600 text-center">{treinador.qualificacoes.nivel_treinador}</p>
-                      <p className="text-xs text-gray-500 text-center">{treinador.experiencia.anos_experiencia} anos de experiência</p>
-                    </div>
-                  ))}
-                  {treinadoresDaModalidade.length > 3 && (
-                    <p className="text-xs text-gray-500 mt-2">+ {treinadoresDaModalidade.length - 3} mais...</p>
-                  )}
-                  {treinadoresDaModalidade.length > 0 && (
-                    <Link 
-                      href={`/modalidades/${modalidade.slug}/treinadores`}
-                      className="text-xs text-blue-600 hover:text-blue-800 mt-2 inline-block font-medium"
-                    >
-                      Ver todos os treinadores →
-                    </Link>
-                  )}
-                </div>
-              </div>
-
-              <div className="bg-white rounded-xl shadow-md p-6">
-                <div className="flex items-center mb-4">
                   <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
                     <span className="text-2xl">📅</span>
                   </div>
@@ -166,7 +134,6 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                 </div>
               </div>
             </div>
-
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Left Column */}
               <div className="space-y-8">
@@ -267,134 +234,12 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                     </table>
                   </div>
                 </div>
-
-                {/* Treinadores Detalhados */}
-                <div className="bg-white rounded-xl shadow-md p-6">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Equipa Técnica</h2>
-                  {treinadoresDaModalidade.length === 0 ? (
-                    <p className="text-gray-600">Equipa técnica em formação.</p>
-                  ) : (
-                    <div className="space-y-6">
-                      {treinadoresDaModalidade.map((treinador) => (
-                        <div key={treinador.id} className="border-b border-gray-100 last:border-0 pb-6 last:pb-0">
-                          <div className="flex flex-col lg:flex-row lg:items-start gap-4">
-                            {/* Foto do Treinador */}
-                            <div className="flex-shrink-0">
-                              <div className="w-20 h-20 relative rounded-lg overflow-hidden">
-                                {treinador.foto ? (
-                                  <Image
-                                    src={treinador.foto}
-                                    alt={`Foto de ${treinador.nome}`}
-                                    fill
-                                    className="object-cover"
-                                  />
-                                ) : (
-                                  <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
-                                    <span className="text-2xl text-blue-600">👤</span>
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-
-                            {/* Informações do Treinador */}
-                            <div className="flex-1">
-                              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-2">
-                                <h3 className="font-bold text-gray-900 text-lg">{treinador.nome}</h3>
-                                <div className="flex gap-2 mt-2 lg:mt-0">
-                                  <span className="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">
-                                    {treinador.experiencia.anos_experiencia} anos
-                                  </span>
-                                  <span className="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
-                                    {treinador.anos_no_clube} anos no GCO
-                                  </span>
-                                </div>
-                              </div>
-
-                              <p className="text-gray-600 text-sm mb-3">{treinador.qualificacoes.nivel_treinador}</p>
-                              
-                              {/* Categorias que treina */}
-                              <div className="mb-3">
-                                <p className="text-sm font-medium text-gray-700 mb-1">Categorias:</p>
-                                <div className="flex flex-wrap gap-1">
-                                  {treinador.categorias.map((categoria, index) => (
-                                    <span key={index} className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded">
-                                      {categoria}
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
-
-                              {/* Principais qualificações */}
-                              <div className="mb-3">
-                                <p className="text-sm font-medium text-gray-700 mb-1">Principais Qualificações:</p>
-                                <ul className="space-y-1">
-                                  {treinador.qualificacoes.certificacoes.slice(0, 3).map((qualificacao, qIndex) => (
-                                    <li key={qIndex} className="text-sm text-gray-600 flex items-center">
-                                      <span className="text-blue-500 mr-2">•</span>
-                                      {qualificacao}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-
-                              {/* Especialidades */}
-                              {treinador.experiencia.especialidades.length > 0 && (
-                                <div className="mb-3">
-                                  <p className="text-sm font-medium text-gray-700 mb-1">Especialidades:</p>
-                                  <div className="flex flex-wrap gap-1">
-                                    {treinador.experiencia.especialidades.slice(0, 4).map((especialidade, index) => (
-                                      <span key={index} className="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">
-                                        {especialidade}
-                                      </span>
-                                    ))}
-                                  </div>
-                                </div>
-                              )}
-
-                              {/* Principais conquistas */}
-                              {Array.isArray(treinador.experiencia.conquistas_como_treinador) && treinador.experiencia.conquistas_como_treinador.length > 0 && (
-                                <div>
-                                  <p className="text-sm font-medium text-gray-700 mb-1">Principais Conquistas:</p>
-                                  <ul className="space-y-1">
-                                    {treinador.experiencia.conquistas_como_treinador.slice(0, 2).map((conquista, cIndex) => (
-                                      <li key={cIndex} className="text-sm text-gray-600 flex items-center">
-                                        <span className="text-yellow-500 mr-2">🏆</span>
-                                        {conquista}
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
               </div>
             </div>
 
 
 
-            {/* Botões de Ação */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-              <Link
-                href={`/modalidades/${modalidade.slug}/atletas`}
-                className="bg-white border-2 border-blue-600 text-blue-600 py-4 px-6 rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300 text-center font-semibold shadow-md hover:shadow-lg flex items-center justify-center"
-              >
-                <span className="mr-2">👥</span>
-                Ver Atletas da Modalidade
-              </Link>
-              
-              <Link
-                href={`/modalidades/${modalidade.slug}/treinadores`}
-                className="bg-white border-2 border-green-600 text-green-600 py-4 px-6 rounded-xl hover:bg-green-600 hover:text-white transition-all duration-300 text-center font-semibold shadow-md hover:shadow-lg flex items-center justify-center"
-              >
-                <span className="mr-2">🎯</span>
-                Ver Equipa Técnica
-              </Link>
-            </div>
+
 
             {/* Contacto e Inscrição */}
             <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg p-8 mt-8 text-white">
