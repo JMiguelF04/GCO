@@ -11,7 +11,6 @@ interface ModalidadePageProps {
 export default async function ModalidadePage({ params }: ModalidadePageProps) {
   const { slug } = params;
   const modalidade = await fetchModalidadeBySlug(params.slug);
-  const treinadoresDaModalidade = modalidade.treinadores || [];
 
   if (!modalidade) {
     notFound();
