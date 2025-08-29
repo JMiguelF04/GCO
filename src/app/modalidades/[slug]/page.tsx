@@ -313,7 +313,7 @@ export default async function ModalidadePage({ params }: any) {
 
 export async function generateStaticParams() {
   const modalidades = await fetchAllModalidadeSlugs();
-  return modalidades.map((modalidade) => ({
+  return modalidades.map((modalidade: {slug: string}) => ({
     slug: modalidade.slug,
   }));
 }
