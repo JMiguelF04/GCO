@@ -7,10 +7,9 @@ interface ModalidadePageProps {
   params: { slug: string };
 }
 
-
 export default async function ModalidadePage({ params }: ModalidadePageProps) {
   const { slug } = params;
-  const modalidade = await fetchModalidadeBySlug(params.slug);
+  const modalidade = await fetchModalidadeBySlug(slug);
 
   if (!modalidade) {
     notFound();
@@ -43,7 +42,7 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                   className="bg-white rounded-xl mr-6 filter drop-shadow-lg flex items-center justify-center"
                   style={{ width: 100, height: 100 }}
                 >
-                  {modalidade.icone.startsWith("/") ? (
+                  {modalidade.icone?.startsWith("/") ? (
                     <Image
                       src={modalidade.icone}
                       alt={modalidade.nome}
@@ -67,7 +66,7 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                       {modalidade.categoria}
                     </span>
                     <span className="bg-blue-500/30 px-3 py-1 rounded-full">
-                      A partir dos {modalidade.idadeMinima} anos
+                      A partir dos {modalidade.idade_minima} anos
                     </span>
                     {modalidade.ativo ? (
                       <span className="bg-green-500 px-3 py-1 rounded-full text-white font-medium">
@@ -102,16 +101,22 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Mensalidade:</span>
-                    <span className="font-semibold text-black">{modalidade.preco.mensalidade}€</span>
+                    <span className="font-semibold text-black">
+                      {modalidade.preco[0]?.mensalidade != null ? `${modalidade.preco[0].mensalidade}€` : "—"}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Inscrição:</span>
-                    <span className="font-semibold text-black">{modalidade.preco.inscricao}€</span>
+                    <span className="font-semibold text-black">
+                      {modalidade.preco[0]?.inscricao != null ? `${modalidade.preco[0].inscricao}€` : "—"}
+                    </span>
                   </div>
-                  {modalidade.preco.equipamento && (
+                  {modalidade.preco[0]?.equipamento && (
                     <div className="flex justify-between">
                       <span className="text-gray-600">Equipamento:</span>
-                      <span className="font-semibold text-black">{modalidade.preco.equipamento}€</span>
+                      <span className="font-semibold text-black">
+                        {modalidade.preco[0].equipamento?.toString()}€
+                      </span>
                     </div>
                   )}
                 </div>
@@ -140,7 +145,7 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                 <div className="bg-white rounded-xl shadow-md p-6">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">Sobre a Modalidade</h2>
                   <p className="text-gray-700 leading-relaxed mb-4">
-                    {modalidade.detalhes.introducao}
+                    {modalidade.detalhes_modalidade[0]?.introducao}
                   </p>
                 </div>
 
@@ -148,10 +153,8 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                 <div className="bg-white rounded-xl shadow-md p-6">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">Níveis Disponíveis</h2>
                   <div className="space-y-3">
-                    {modalidade.niveis.map((nivel, index) => (
-                      <div key={index} className="bg-blue-50 p-3 rounded-lg">
-                        <span className="font-medium text-blue-900">{nivel}</span>
-                      </div>
+                    {modalidade.niveis.map((nivel: any, index: number) => (
+                      <div key={index}>{nivel.descricao}</div>
                     ))}
                   </div>
                 </div>
@@ -160,10 +163,10 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                   <div className="bg-white rounded-xl shadow-md p-6">
                     <h2 className="text-2xl font-bold text-gray-900 mb-4">Competições</h2>
                     <div className="space-y-2">
-                      {modalidade.competicoes.map((competicao, index) => (
+                      {modalidade.competicoes.map((competicao: any, index: number) => (
                         <div key={index} className="flex items-center">
                           <span className="text-yellow-500 mr-2">🏆</span>
-                          <span className="text-gray-700 text-sm">{competicao}</span>
+                          <span className="text-gray-700 text-sm">{competicao.nome}</span>
                         </div>
                       ))}
                     </div>
@@ -174,10 +177,10 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                 <div className="bg-white rounded-xl shadow-md p-6">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">Equipamento Necessário</h2>
                   <div className="space-y-2">
-                    {modalidade.equipamento.map((item, index) => (
+                    {modalidade.equipamento.map((item: any, index: number) => (
                       <div key={index} className="flex items-center">
                         <span className="text-blue-500 mr-2">•</span>
-                        <span className="text-gray-700 text-sm">{item}</span>
+                        <span className="text-gray-700 text-sm">{item.nome}</span>
                       </div>
                     ))}
                   </div>
@@ -185,7 +188,7 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                 {/* Metodologia */}
                 <div className="bg-white rounded-xl shadow-md p-6 mb-6">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">Metodologia</h2>
-                  <p className="text-gray-700 leading-relaxed">{modalidade.detalhes.metodologia}</p>
+                  <p className="text-gray-700 leading-relaxed">{modalidade.detalhes_modalidade[0]?.metodologia}</p>
                 </div>
                 {/* Avaliação e Progressão */}
                 <div className="bg-white rounded-xl shadow-md p-6">
@@ -193,11 +196,11 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                   <div className="space-y-4">
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-2">Avaliação:</h3>
-                      <p className="text-gray-700 text-sm">{modalidade.detalhes.avaliacao}</p>
+                      <p className="text-gray-700 text-sm">{modalidade.detalhes_modalidade[0]?.avaliacao}</p>
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-2">Progressão:</h3>
-                      <p className="text-gray-700 text-sm">{modalidade.detalhes.progressao}</p>
+                      <p className="text-gray-700 text-sm">{modalidade.detalhes_modalidade[0]?.progressao}</p>
                     </div>
                   </div>
                 </div>
@@ -218,10 +221,14 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                         </tr>
                       </thead>
                       <tbody>
-                        {modalidade.horarios.map((horario, index) => (
+                        {modalidade.horarios.map((horario: any, index: number) => (
                           <tr key={index} className="border-b border-gray-100">
                             <td className="py-2 text-gray-900">{horario.dia}</td>
-                            <td className="py-2 text-gray-700">{horario.inicio} - {horario.fim}</td>
+                            <td className="py-2 text-gray-700">
+                              {horario.inicio && horario.fim
+                                ? `${new Date(horario.inicio).toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' })} - ${new Date(horario.fim).toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' })}`
+                                : '--'}
+                            </td>
                             <td className="py-2">
                               <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">
                                 {horario.nivel}
@@ -236,10 +243,6 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
               </div>
             </div>
 
-
-
-
-
             {/* Contacto e Inscrição */}
             <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg p-8 mt-8 text-white">
               <div className="text-center mb-6">
@@ -251,12 +254,12 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
                 <div>
                   <h3 className="text-xl font-bold mb-4">Informações de Contacto</h3>
                   <div className="space-y-2">
-                    <p><strong>Responsável:</strong> {modalidade.contacto.responsavel}</p>
-                    {modalidade.contacto.telefone && (
-                      <p><strong>Telefone:</strong> {modalidade.contacto.telefone}</p>
+                    <p><strong>Responsável:</strong> {modalidade.contacto_modalidade[0]?.responsavel}</p>
+                    {modalidade.contacto_modalidade[0]?.telefone && (
+                      <p><strong>Telefone:</strong> {modalidade.contacto_modalidade[0]?.telefone}</p>
                     )}
-                    {modalidade.contacto.email && (
-                      <p><strong>Email:</strong> {modalidade.contacto.email}</p>
+                    {modalidade.contacto_modalidade[0]?.email && (
+                      <p><strong>Email:</strong> {modalidade.contacto_modalidade[0]?.email}</p>
                     )}
                   </div>
                 </div>
@@ -299,9 +302,9 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
               </Link>
             </div>
             <div className="text-sm text-gray-500">
-              <p><strong>Contacto:</strong> {modalidade.contacto.responsavel}</p>
-              {modalidade.contacto.email && (
-                <p><strong>Email:</strong> {modalidade.contacto.email}</p>
+              <p><strong>Contacto:</strong> {modalidade.contacto_modalidade[0]?.responsavel}</p>
+              {modalidade.contacto_modalidade[0]?.email && (
+                <p><strong>Email:</strong> {modalidade.contacto_modalidade[0]?.email}</p>
               )}
             </div>
           </div>
@@ -311,8 +314,10 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
   );
 }
 
+import { fetchAllModalidadeSlugs } from "@/data/modalidades-db";
+
 export async function generateStaticParams() {
-  const { modalidades } = await import("@/data/modalidades");
+  const modalidades = await fetchAllModalidadeSlugs();
   return modalidades.map((modalidade) => ({
     slug: modalidade.slug,
   }));

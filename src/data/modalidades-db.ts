@@ -1,5 +1,12 @@
 import prisma from "@/lib/prisma";
 
+export async function fetchAllModalidadeSlugs() {
+  const modalidades = await prisma.modalidades.findMany({
+    select: { slug: true }
+  });
+  return modalidades;
+}
+
 export async function fetchModalidadeBySlug(slug: string) {
   const modalidade = await prisma.modalidades.findUnique({
     where: { slug },
@@ -10,19 +17,19 @@ export async function fetchModalidadeBySlug(slug: string) {
       competicoes: { select: { nome: true } },
       horarios: true,
       contacto_modalidade: true,
+      preco: true, // Inclui logo o array de preços
     },
   });
 
   if (!modalidade) return null;
 
-  // Transformar arrays de objectos em arrays de strings onde necessário
-  modalidade.niveis = modalidade.niveis.map((n) => n.descricao);
-  modalidade.equipamento = modalidade.equipamento.map((e) => e.nome);
-  modalidade.competicoes = modalidade.competicoes.map((c) => c.nome);
-  modalidade.contacto = modalidade.contacto_modalidade[0] || {};
-  modalidade.preco = await prisma.preco.findFirst({
-    where: { modalidade_id: modalidade.id },
-  });
-
-  return modalidade;
+  // Cria um novo objeto, sem modificar o original
+  return {
+    ...modalidade,
+    niveis: modalidade.niveis.map((n) => n.descricao),
+    equipamento: modalidade.equipamento.map((e) => e.nome),
+    competicoes: modalidade.competicoes.map((c) => c.nome),
+    contacto: modalidade.contacto_modalidade[0] || {},
+    preco: modalidade.preco, // Mantém como array, como vem do Prisma
+  };
 }
