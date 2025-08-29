@@ -1,15 +1,12 @@
-import { fetchModalidadeBySlug } from "@/data/modalidades-db";
+import { fetchModalidadeBySlug, fetchAllModalidadeSlugs } from "@/data/modalidades-db";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
-interface ModalidadePageProps {
-  params: { slug: string };
-}
 
-export default async function ModalidadePage({ params }: ModalidadePageProps) {
-  const { slug } = params;
-  const modalidade = await fetchModalidadeBySlug(slug);
+export default async function ModalidadePage({ params }: any) {
+  const modalidade = await fetchModalidadeBySlug(params.slug);
+  
 
   if (!modalidade) {
     notFound();
@@ -313,8 +310,6 @@ export default async function ModalidadePage({ params }: ModalidadePageProps) {
     </main>
   );
 }
-
-import { fetchAllModalidadeSlugs } from "@/data/modalidades-db";
 
 export async function generateStaticParams() {
   const modalidades = await fetchAllModalidadeSlugs();
