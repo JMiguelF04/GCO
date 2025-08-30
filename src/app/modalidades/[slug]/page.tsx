@@ -3,11 +3,10 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
-// Tipagem segura
-type ModalidadeSlug = { slug: string };
 
-export default async function ModalidadePage({ params }: { params: ModalidadeSlug }) {
-  const modalidade = await fetchModalidadeBySlug(params.slug);
+export default async function ModalidadePage(props:any) {
+  const {slug} = props.params;
+  const modalidade = await fetchModalidadeBySlug(slug);
 
   if (!modalidade) notFound();
 
