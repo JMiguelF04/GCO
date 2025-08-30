@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import LogoRain from '@/components/layout/LogoRain';
+import { calcularIdadeClube } from '@/utils/idadeClube';
 
 export default function HistoriaPage() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -107,6 +108,8 @@ A motivação mantém-se inabalável: fazer do G.C.O. o maior e melhor clube do 
     'Todas as entidades privadas que têm contribuído para a nossa missão'
   ];
 
+  const idade = calcularIdadeClube(new Date(1978,4,5));
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 relative overflow-hidden">
      
@@ -124,7 +127,7 @@ A motivação mantém-se inabalável: fazer do G.C.O. o maior e melhor clube do 
             <span className="text-yellow-400">2025</span>
           </div>
           <p className="text-xl mt-4 opacity-90">
-            47 anos de paixão, dedicação e conquistas
+            {idade} anos de paixão, dedicação e conquistas
           </p>
         </div>
         

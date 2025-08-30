@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "../components/layout/footer";
 import Navbar from "../components/layout/navbar";
 import SponsorsSection from "@/components/SponsorsSection";
+import { calcularIdadeClube } from "@/utils/idadeClube";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +16,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const idade = calcularIdadeClube(new Date(1978, 4, 5));
+
 export const metadata: Metadata = {
-  title: "Ginásio Clube de Odivelas - 46 anos de tradição desportiva",
+  title: `Ginásio Clube de Odivelas - ${idade} anos de tradição desportiva`,
   description: "Clube desportivo em Odivelas com modalidades de ginástica, andebol, patinagem artística, hóquei em patins, dança e xadrez. Junte-se à nossa família desportiva!",
 };
 

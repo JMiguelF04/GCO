@@ -1,4 +1,9 @@
+import { calcularIdadeClube } from "@/utils/idadeClube";
+
 export default function HeroSection() {
+
+  const idade = calcularIdadeClube(new Date(1978, 4, 5));
+  
   return (
     <section className="relative bg-gradient-to-r from-blue-800 via-blue-700 to-blue-900 text-white py-20">
       <div className="absolute inset-0 bg-black opacity-20"></div>
@@ -15,7 +20,7 @@ export default function HeroSection() {
             Ginásio Clube de Odivelas
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-blue-100">
-            46 anos de tradição desportiva e cultural
+            {idade} anos de tradição desportiva e cultural
           </p>
           <p className="text-lg mb-8 max-w-3xl mx-auto text-blue-50">
             Com sede em Odivelas, o clube dedica-se a promover a prática de diversas modalidades desportivas, 
