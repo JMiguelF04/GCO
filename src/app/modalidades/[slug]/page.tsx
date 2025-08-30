@@ -136,7 +136,7 @@ export default async function ModalidadePage(props:any) {
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">Níveis Disponíveis</h2>
                   <div className="space-y-3">
                     {modalidade.niveis?.map((nivel, index) => (
-                      <div key={index}>{nivel.descricao ?? "—"}</div>
+                      <div key={index}>{nivel || "—"}</div>
                     ))}
                   </div>
                 </div>
@@ -149,7 +149,7 @@ export default async function ModalidadePage(props:any) {
                       {modalidade.competicoes.map((c, i) => (
                         <div key={i} className="flex items-center">
                           <span className="text-yellow-500 mr-2">🏆</span>
-                          <span className="text-gray-700 text-sm">{c.nome ?? "—"}</span>
+                          <span className="text-gray-700 text-sm">{c || "—"}</span>
                         </div>
                       ))}
                     </div>
@@ -163,7 +163,7 @@ export default async function ModalidadePage(props:any) {
                     {modalidade.equipamento?.map((item, index) => (
                       <div key={index} className="flex items-center">
                         <span className="text-blue-500 mr-2">•</span>
-                        <span className="text-gray-700 text-sm">{item.nome ?? "—"}</span>
+                        <span className="text-gray-700 text-sm">{item || "—"}</span>
                       </div>
                     ))}
                   </div>
