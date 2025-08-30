@@ -3,27 +3,22 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
+// Tipagem segura
+type ModalidadeSlug = { slug: string };
 
-export default async function ModalidadePage({ params }: any) {
+export default async function ModalidadePage({ params }: { params: ModalidadeSlug }) {
   const modalidade = await fetchModalidadeBySlug(params.slug);
-  
 
-  if (!modalidade) {
-    notFound();
-  }
+  if (!modalidade) notFound();
 
   return (
     <main className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="mb-8">
           <div className="flex items-center space-x-2 text-sm text-gray-500">
-            <Link href="/" className="hover:text-blue-600 transition-colors">
-              Início
-            </Link>
+            <Link href="/" className="hover:text-blue-600 transition-colors">Início</Link>
             <span>/</span>
-            <Link href="/modalidades" className="hover:text-blue-600 transition-colors">
-              Modalidades
-            </Link>
+            <Link href="/modalidades" className="hover:text-blue-600 transition-colors">Modalidades</Link>
             <span>/</span>
             <span className="text-gray-900 font-medium">{modalidade.nome}</span>
           </div>
@@ -48,31 +43,23 @@ export default async function ModalidadePage({ params }: any) {
                       className="object-contain"
                     />
                   ) : (
-                    <span className="text-6xl">{modalidade.icone}</span>
+                    <span className="text-6xl">{modalidade.icone ?? "🏅"}</span>
                   )}
                 </div>
                 <div>
-                  <h1 className="text-4xl font-bold mb-2">
-                    {modalidade.nome}
-                  </h1>
-                  <p className="text-xl text-blue-100 mb-3">
-                    {modalidade.descricao}
-                  </p>
+                  <h1 className="text-4xl font-bold mb-2">{modalidade.nome}</h1>
+                  <p className="text-xl text-blue-100 mb-3">{modalidade.descricao ?? ""}</p>
                   <div className="flex items-center space-x-4 text-sm">
-                    <span className="bg-blue-500/30 px-3 py-1 rounded-full">
-                      {modalidade.categoria}
-                    </span>
+                    {modalidade.categoria && (
+                      <span className="bg-blue-500/30 px-3 py-1 rounded-full">{modalidade.categoria}</span>
+                    )}
                     <span className="bg-blue-500/30 px-3 py-1 rounded-full">
                       A partir dos {modalidade.idade_minima} anos
                     </span>
                     {modalidade.ativo ? (
-                      <span className="bg-green-500 px-3 py-1 rounded-full text-white font-medium">
-                        ✓ Ativo
-                      </span>
+                      <span className="bg-green-500 px-3 py-1 rounded-full text-white font-medium">✓ Ativo</span>
                     ) : (
-                      <span className="bg-red-500 px-3 py-1 rounded-full text-white font-medium">
-                        ⚠ Suspenso
-                      </span>
+                      <span className="bg-red-500 px-3 py-1 rounded-full text-white font-medium">⚠ Suspenso</span>
                     )}
                   </div>
                 </div>
@@ -99,21 +86,19 @@ export default async function ModalidadePage({ params }: any) {
                   <div className="flex justify-between">
                     <span className="text-gray-600">Mensalidade:</span>
                     <span className="font-semibold text-black">
-                      {modalidade.preco[0]?.mensalidade != null ? `${modalidade.preco[0].mensalidade}€` : "—"}
+                      {modalidade.preco?.[0]?.mensalidade != null ? `${modalidade.preco[0].mensalidade}€` : "—"}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Inscrição:</span>
                     <span className="font-semibold text-black">
-                      {modalidade.preco[0]?.inscricao != null ? `${modalidade.preco[0].inscricao}€` : "—"}
+                      {modalidade.preco?.[0]?.inscricao != null ? `${modalidade.preco[0].inscricao}€` : "—"}
                     </span>
                   </div>
-                  {modalidade.preco[0]?.equipamento && (
+                  {modalidade.preco?.[0]?.equipamento != null && (
                     <div className="flex justify-between">
                       <span className="text-gray-600">Equipamento:</span>
-                      <span className="font-semibold text-black">
-                        {modalidade.preco[0].equipamento?.toString()}€
-                      </span>
+                      <span className="font-semibold text-black">{modalidade.preco[0].equipamento?.toString()}€</span>
                     </div>
                   )}
                 </div>
@@ -126,7 +111,7 @@ export default async function ModalidadePage({ params }: any) {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900">Horários</h3>
-                    <p className="text-sm text-gray-600 text-black">{modalidade.horarios.length} sessões/semana</p>
+                    <p className="text-sm text-gray-600 text-black">{modalidade.horarios?.length ?? 0} sessões/semana</p>
                   </div>
                 </div>
                 <div className="text-sm text-gray-600">
@@ -135,14 +120,15 @@ export default async function ModalidadePage({ params }: any) {
                 </div>
               </div>
             </div>
+
+            {/* Left Column */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Left Column */}
               <div className="space-y-8">
-                {/* Introdução */}
+                {/* Sobre a Modalidade */}
                 <div className="bg-white rounded-xl shadow-md p-6">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">Sobre a Modalidade</h2>
                   <p className="text-gray-700 leading-relaxed mb-4">
-                    {modalidade.detalhes_modalidade[0]?.introducao}
+                    {modalidade.detalhes_modalidade?.[0]?.introducao ?? ""}
                   </p>
                 </div>
 
@@ -150,20 +136,21 @@ export default async function ModalidadePage({ params }: any) {
                 <div className="bg-white rounded-xl shadow-md p-6">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">Níveis Disponíveis</h2>
                   <div className="space-y-3">
-                    {modalidade.niveis.map((nivel: any, index: number) => (
-                      <div key={index}>{nivel.descricao}</div>
+                    {modalidade.niveis?.map((nivel, index) => (
+                      <div key={index}>{nivel.descricao ?? "—"}</div>
                     ))}
                   </div>
                 </div>
+
                 {/* Competições */}
-                {modalidade.competicoes.length > 0 && (
+                {modalidade.competicoes?.length > 0 && (
                   <div className="bg-white rounded-xl shadow-md p-6">
                     <h2 className="text-2xl font-bold text-gray-900 mb-4">Competições</h2>
                     <div className="space-y-2">
-                      {modalidade.competicoes.map((competicao: any, index: number) => (
-                        <div key={index} className="flex items-center">
+                      {modalidade.competicoes.map((c, i) => (
+                        <div key={i} className="flex items-center">
                           <span className="text-yellow-500 mr-2">🏆</span>
-                          <span className="text-gray-700 text-sm">{competicao.nome}</span>
+                          <span className="text-gray-700 text-sm">{c.nome ?? "—"}</span>
                         </div>
                       ))}
                     </div>
@@ -174,30 +161,34 @@ export default async function ModalidadePage({ params }: any) {
                 <div className="bg-white rounded-xl shadow-md p-6">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">Equipamento Necessário</h2>
                   <div className="space-y-2">
-                    {modalidade.equipamento.map((item: any, index: number) => (
+                    {modalidade.equipamento?.map((item, index) => (
                       <div key={index} className="flex items-center">
                         <span className="text-blue-500 mr-2">•</span>
-                        <span className="text-gray-700 text-sm">{item.nome}</span>
+                        <span className="text-gray-700 text-sm">{item.nome ?? "—"}</span>
                       </div>
                     ))}
                   </div>
                 </div>
+
                 {/* Metodologia */}
                 <div className="bg-white rounded-xl shadow-md p-6 mb-6">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">Metodologia</h2>
-                  <p className="text-gray-700 leading-relaxed">{modalidade.detalhes_modalidade[0]?.metodologia}</p>
+                  <p className="text-gray-700 leading-relaxed">
+                    {modalidade.detalhes_modalidade?.[0]?.metodologia ?? ""}
+                  </p>
                 </div>
+
                 {/* Avaliação e Progressão */}
                 <div className="bg-white rounded-xl shadow-md p-6">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">Avaliação e Progressão</h2>
                   <div className="space-y-4">
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-2">Avaliação:</h3>
-                      <p className="text-gray-700 text-sm">{modalidade.detalhes_modalidade[0]?.avaliacao}</p>
+                      <p className="text-gray-700 text-sm">{modalidade.detalhes_modalidade?.[0]?.avaliacao ?? ""}</p>
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-2">Progressão:</h3>
-                      <p className="text-gray-700 text-sm">{modalidade.detalhes_modalidade[0]?.progressao}</p>
+                      <p className="text-gray-700 text-sm">{modalidade.detalhes_modalidade?.[0]?.progressao ?? ""}</p>
                     </div>
                   </div>
                 </div>
@@ -218,18 +209,16 @@ export default async function ModalidadePage({ params }: any) {
                         </tr>
                       </thead>
                       <tbody>
-                        {modalidade.horarios.map((horario: any, index: number) => (
-                          <tr key={index} className="border-b border-gray-100">
-                            <td className="py-2 text-gray-900">{horario.dia}</td>
+                        {modalidade.horarios?.map((h, i) => (
+                          <tr key={i} className="border-b border-gray-100">
+                            <td className="py-2 text-gray-900">{h.dia ?? "--"}</td>
                             <td className="py-2 text-gray-700">
-                              {horario.inicio && horario.fim
-                                ? `${new Date(horario.inicio).toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' })} - ${new Date(horario.fim).toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' })}`
+                              {h.inicio && h.fim
+                                ? `${new Date(h.inicio).toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' })} - ${new Date(h.fim).toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' })}`
                                 : '--'}
                             </td>
                             <td className="py-2">
-                              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">
-                                {horario.nivel}
-                              </span>
+                              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">{h.nivel ?? ""}</span>
                             </td>
                           </tr>
                         ))}
@@ -251,12 +240,12 @@ export default async function ModalidadePage({ params }: any) {
                 <div>
                   <h3 className="text-xl font-bold mb-4">Informações de Contacto</h3>
                   <div className="space-y-2">
-                    <p><strong>Responsável:</strong> {modalidade.contacto_modalidade[0]?.responsavel}</p>
-                    {modalidade.contacto_modalidade[0]?.telefone && (
-                      <p><strong>Telefone:</strong> {modalidade.contacto_modalidade[0]?.telefone}</p>
+                    <p><strong>Responsável:</strong> {modalidade.contacto_modalidade?.[0]?.responsavel ?? "—"}</p>
+                    {modalidade.contacto_modalidade?.[0]?.telefone && (
+                      <p><strong>Telefone:</strong> {modalidade.contacto_modalidade[0].telefone}</p>
                     )}
-                    {modalidade.contacto_modalidade[0]?.email && (
-                      <p><strong>Email:</strong> {modalidade.contacto_modalidade[0]?.email}</p>
+                    {modalidade.contacto_modalidade?.[0]?.email && (
+                      <p><strong>Email:</strong> {modalidade.contacto_modalidade[0].email}</p>
                     )}
                   </div>
                 </div>
@@ -268,9 +257,7 @@ export default async function ModalidadePage({ params }: any) {
                   >
                     Inscrever-me Agora
                   </Link>
-                  <p className="text-sm text-blue-100 mt-2">
-                    Processo de inscrição simples e rápido
-                  </p>
+                  <p className="text-sm text-blue-100 mt-2">Processo de inscrição simples e rápido</p>
                 </div>
               </div>
             </div>
@@ -299,9 +286,9 @@ export default async function ModalidadePage({ params }: any) {
               </Link>
             </div>
             <div className="text-sm text-gray-500">
-              <p><strong>Contacto:</strong> {modalidade.contacto_modalidade[0]?.responsavel}</p>
-              {modalidade.contacto_modalidade[0]?.email && (
-                <p><strong>Email:</strong> {modalidade.contacto_modalidade[0]?.email}</p>
+              <p><strong>Contacto:</strong> {modalidade.contacto_modalidade?.[0]?.responsavel ?? "—"}</p>
+              {modalidade.contacto_modalidade?.[0]?.email && (
+                <p><strong>Email:</strong> {modalidade.contacto_modalidade[0].email}</p>
               )}
             </div>
           </div>
@@ -313,7 +300,7 @@ export default async function ModalidadePage({ params }: any) {
 
 export async function generateStaticParams() {
   const modalidades = await fetchAllModalidadeSlugs();
-  return modalidades.map((modalidade: {slug: string}) => ({
+  return modalidades.map((modalidade) => ({
     slug: modalidade.slug,
   }));
 }
