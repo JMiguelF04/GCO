@@ -171,12 +171,12 @@ export default function SerSocioPage() {
                     </div>
                     <div>
                     <AccordionSection title='2019-2014'>
-                      <a href="/files/pdf/relatorios-de-contas/Relatorio-contas-2019.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2019</a>
-                      <a href="/files/pdf/relatorios-de-contas/Relatorio-contas-2018.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2018</a>
-                      <a href="/files/pdf/relatorios-de-contas/Relatorio-contas-2017.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2017</a>
-                      <a href="/files/pdf/relatorios-de-contas/Relatorio-contas-2016.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2016</a>
-                      <a href="/files/pdf/relatorios-de-contas/Relatorio-contas-2015.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2015</a>
-                      <a href="/files/pdf/relatorios-de-contas/Relatorio-contas-2014.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2014</a>
+                      <a href="\files\pdf\relatorios-de-contas\Relatorio-contas-2019.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2019</a>
+                      <a href="\files\pdf\relatorios-de-contas\Relatorio-contas-2018.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2018</a>
+                      <a href="\files\pdf\relatorios-de-contas\Relatorio-contas-2017.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2017</a>
+                      <a href="\files\pdf\relatorios-de-contas\Relatorio-contas-2016.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2016</a>
+                      <a href="\files\pdf\relatorios-de-contas\Relatorio-contas-2015.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2015</a>
+                      <a href="\files\pdf\relatorios-de-contas\Relatorio-contas-2014.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline cursor-pointer block">2014</a>
                     </AccordionSection>
                     </div>
                 </div>
