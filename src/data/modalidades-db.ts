@@ -26,9 +26,9 @@ export async function fetchModalidadeBySlug(slug: string) {
   // Cria um novo objeto, sem modificar o original
   return {
     ...modalidade,
-    niveis: modalidade.niveis.map((n: {descricao: string}) => n.descricao),
-    equipamento: modalidade.equipamento.map((e: {nome: string}) => e.nome),
-    competicoes: modalidade.competicoes.map((c: {nome: string}) => c.nome),
+    niveis: modalidade.niveis.map((n: { descricao: string | null }) => n.descricao ?? ''),
+    equipamento: modalidade.equipamento.map((e: { nome: string | null }) => e.nome ?? ''),
+    competicoes: modalidade.competicoes.map((c: { nome: string | null }) => c.nome ?? ''),
     contacto: modalidade.contacto_modalidade[0] || {},
     preco: modalidade.preco, // Mantém como array, como vem do Prisma
   };
